@@ -3,10 +3,11 @@ $(function(){
     const main_btn = $(".log_box");
 //    const $logout_btn = $(".gnb_my_list_last");
 
-    $(".gnb_my_list_last").on('click', function(){
-    	console.log('hi');
-    });
-    
+    const log_out =$(".gnb_my_list_last").on("click", function(){
+        
+        window.location.href="login/logout.jsp";
+        
+     })
     $(main_btn).on('click',function(){
         location.href="../Main.jsp"
     })
