@@ -4,7 +4,7 @@ $(function(){
 //    const $logout_btn = $(".gnb_my_list_last");
 
     const log_out =$(".gnb_my_list_last").on("click", function(){
-        
+        console.log('g');
         window.location.href="login/logout.jsp";
         
      })
@@ -93,7 +93,6 @@ $(function(){
         $(open_cat).on('click',open_category);
         searchbox()
         log_join()
-        logout();
     }
     $(document)
     init();
