@@ -16,8 +16,10 @@
 <body>
 <%
 	String userId = null;
+	String userNick = null;
 	if (session.getAttribute("userId") != null){
 		userId = (String) session.getAttribute("userId");
+		userNick = (String) session.getAttribute("userNick");
 	}
 %>
   <div id="__next" style="height: auto !important;">
@@ -49,7 +51,7 @@
 	}else{
 %>
 		<div class="btn_box">
-    <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title">n15979427님</span></div>
+    <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
     <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
             <div class="chat_cnt">4</div>
         </a><a href="https://account.hellomarket.com/alarms" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
@@ -60,7 +62,7 @@
 	}
 %>
           <div style="display: none;">
-            <div class="gnb_my_lyr test_type"><a href="/m/level.hm">
+            <div class="gnb_my_lyr test_type"><a href="mystore/level.jsp">
                 <div class="gnb_my_member_level"><img class="gnb_my_member_level_img" src="img/img_level_3_420x420.png"
                     alt="뱃지 이미지">
                   <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
@@ -70,14 +72,8 @@
                   <li class="gnb_my_list_first">내상점</li>
                 </a><a href="/m/hellopay.hm?type=seller&amp;status=open">
                   <li>헬로페이 거래내역</li>
-                </a><a href="/m/wallet/history">
-                  <li>전자지갑 · 결제관리</li>
                 </a><a href="/m/coupon">
                   <li>할인쿠폰</li>
-                </a><a href="/m/order/auto/sales/list.hm">
-                  <li>일반 결제내역</li>
-                </a><a href="/m/shipping.hm?type=sender">
-                  <li>배송관리</li>
                 </a>
                 <li class="gnb_my_list_last">로그아웃</li>
               </ul>
@@ -1318,6 +1314,6 @@
   <!-- 푸터 찾았다!!!!!-->
 
 </body>
-<script src="js/common.js"></script>
+<script src="js/common.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="js/scrolling.js"></script>
 </html>

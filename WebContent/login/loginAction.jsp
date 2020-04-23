@@ -16,8 +16,10 @@
 <body>
 	<%
 	String userID = null;
+	String userNick = null;
 	if(session.getAttribute("userId") != null){
 		userID = (String) session.getAttribute("userId");
+		userNick = (String) session.getAttribute("userNick");
 	}
 	if(userID != null){
 		PrintWriter script = response.getWriter();
@@ -29,8 +31,15 @@
 	UserDAO userDAO = new UserDAO();
 	int result = userDAO.login(user.getUserId(), user.getUserPass());
 	if(result==1){
-		session.setAttribute("userId",user.getUserId());
 		PrintWriter script = response.getWriter();
+		userNick = userDAO.selectUserNick(user.getUserId());
+		if(userNick.equals("no")){
+			script.println("<script>");
+			script.println("alert('뭔가 이상하네욤')");
+			script.println("</script>"); 
+		}
+		session.setAttribute("userNick", userNick);
+		session.setAttribute("userId",user.getUserId());
 		script.println("<script>");
 		script.println("location.href = '../Main.jsp'");
 		script.println("</script>"); 

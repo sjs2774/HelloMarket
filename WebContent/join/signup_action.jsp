@@ -9,8 +9,6 @@
 <%
 	UserDAO userDAO = new UserDAO();
 	int result = userDAO.join(user);
-	out.println(user.getUserId());
-	out.println(user.getUserPass());
 	if(result== -1){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");

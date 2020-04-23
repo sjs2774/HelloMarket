@@ -5,7 +5,7 @@ $(function(){
 
     const log_out =$(".gnb_my_list_last").on("click", function(){
         console.log('g');
-        window.location.href="login/logout.jsp";
+        window.location.href="/HelloMarket/login/logout.jsp";
         
      })
     $(main_btn).on('click',function(){
