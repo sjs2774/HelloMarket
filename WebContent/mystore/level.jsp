@@ -15,9 +15,13 @@
 <%
 	String userId = null;
 	String userNick = null;
+	String userProfile = null;
+	int sellerLevel = 0;
 	if (session.getAttribute("userId") != null){
 		userId = (String) session.getAttribute("userId");
 		userNick = (String) session.getAttribute("userNick");
+		userProfile = (String) session.getAttribute("userProf");
+		sellerLevel = (int)session.getAttribute("sellerLevel");
 	}
 	
 %>
@@ -233,7 +237,7 @@
                                                     src="../img/img_apply_profile_4x_0419.png"
                                                     alt="n14474743의 프로필 이미지"><img src="../img/img_level_5_x2.png"
                                                     alt="뱃지 이미지"></div>
-                                            <div class="my_profile_nick">판매왕</div>
+                                            <div class="my_profile_nick"><%=userNick %></div>
                                             <div class="my_profile_shop_created">
                                                 <div class="my_profile_start_mobile">태조 2년 시작</div>
                                                 <div class="my_profile_shop"><a href="/m/profile"><button
@@ -269,8 +273,7 @@
                                                                 src="../img/img_review_star_half_16x16_x2.png"
                                                                 alt="프로필 별점 없는 이미지 5"></div>
                                                     </a></div>
-                                            </div><span class="my_profile_more_text" width="0"><span><span>이 시대 최고의
-                                                        판매왕</span></span><span
+                                            </div><span class="my_profile_more_text" width="0"><span><span><%=userProfile %></span></span><span
                                                     style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
                                                         class="text_trcucate_more">... <p>전체보기</p></span></span></span>
                                         </div>
@@ -303,10 +306,25 @@
                                 <section class="left_main">
                                     <div class="level_top">
                                         <div class="level_header">
-                                            <div class="level_image"><img src="../img/img_level_5_x2.png"
+                                        <%if(sellerLevel == 1){
+                                        %>
+                                            <div class="level_image"><img src="../img/img_level1_30.png"
                                                     alt="나의 등급 뱃지 이미지"></div>
-                                            <div class="level_title">이번달 n14474743님은 <span>최고 등급</span> 입니다.</div>
-                                            <div class="level_next">헬로페이 1232135건 이상 거래 시 우주판매왕 등급으로 변경됩니다.</div>
+                                        <%        
+                                        }else if(sellerLevel == 2){
+                                        %>
+                                        	<div class="level_image"><img src="../img/img_level2_30.png"
+                                                    alt="나의 등급 뱃지 이미지"></div>
+                                        <% 
+                                        }else{
+                                        %>
+                                        	<div class="level_image"><img src="../img/img_level_3_420x420.png"
+                                                    alt="나의 등급 뱃지 이미지"></div>
+                                        <% 
+                                        }
+                                        %>
+                                            <div class="level_title"><%= userNick %> 님의 현재 등급은<span>Level <%=sellerLevel %></span> 입니다.</div>
+                                            <div class="level_next">거래 1건 이상 거래 시 Level <%=sellerLevel+1 %>등급으로 변경됩니다.</div>
                                         </div>
                                         <div class="level_body">
                                             <div class="level_title">내가 받고 있는 혜택</div>

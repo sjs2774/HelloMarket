@@ -6,7 +6,38 @@ public class UserDTO {
 	private String userId;
 	private int userIdx;
 	private String userNick;
+	private String userProf;
+	private int sellerLevel;
+	public int getUserPh() {
+		return userPh;
+	}
+	public void setUserPh(int userPh) {
+		this.userPh = userPh;
+	}
+
+	private int userPh;
+	public String getUserProf() {
+		return userProf;
+	}
+	public void setUserProf(String userProf) {
+		this.userProf = userProf;
+	}
+
+	public int getSellerLevel() {
+		return sellerLevel;
+	}
+	public void setSellerLevel(int sellerLevel) {
+		this.sellerLevel = sellerLevel;
+	}
+
+	int couponIdx;
 	
+	public int getCouponIdx() {
+		return couponIdx;
+	}
+	public void setCouponIdx(int couponIdx) {
+		this.couponIdx = couponIdx;
+	}
 	public int getUserIdx() {
 		return userIdx;
 	}

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="org.json.simple.*" %>
 <%@ page import="User.CouponDAO"%>
 <%@ page import ="User.CouponDTO" %>
+<%@ page import ="User.UserDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -12,19 +14,7 @@
 <%
 	List<CouponDTO> couponList = new ArrayList<CouponDTO>();
 	couponList = coupon.showCouponList();
-	for(int i=0;i<couponList.size();i++){
-		System.out.println(couponList.get(i).getCouponName());
-	}
 %>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="../css/chunk.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-
-<body>
   <%
 	String userId = null;
 	String userNick = null;
@@ -35,6 +25,113 @@
 	
 %>
       
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../css/chunk.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="ReactModalPortal" style="display: none;">
+        <div class="ReactModal__Overlay ReactModal__Overlay--after-open overlay" style="overflow: auto;">
+            <div class="ReactModal__Content ReactModal__Content--after-open modal_main" tabindex="-1" role="dialog">
+                <div class="modal_parent">
+                    <div class="modal_container">
+                        <div class="modal_wrapper popup_type2_modal">
+                            <div class="modal_body">
+                                <div class="title">유의사항</div>
+                                <div class="popup_type2_notice">
+                                    <ul>
+                                        <li><span class="dot_position">•</span><span class="description_position">쿠폰 종류에 따라 적용대상과 유효기간 등 조건이 상이합니다.</span></li>
+                                        <li><span class="dot_position">•</span><span class="description_position">쿠폰을 사용한 거래가 배송 전 주문취소 된 경우 유효기간 내 재발급 되며, 유효기간이 경과시 재발급이 불가합니다.</span></li>
+                                        <li><span class="dot_position">•</span><span class="description_position">당사 사정에 따라 사전고지 없이 제공중인 쿠폰 내용이 변경되거나 종료될 수 있습니다.</span></li>
+                                    </ul>
+                                </div>
+                                <div class="popup_type2_footer"><button type="button">확인</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+
+    <div class="ReactModalPortal" style="display: none;">
+        <div class="ReactModal__Overlay ReactModal__Overlay--after-open overlay" style="overflow: auto;">
+            <div class="ReactModal__Content ReactModal__Content--after-open modal_main" tabindex="-1" role="dialog">
+                <div class="modal_parent">
+                    <div class="modal_container">
+                        <div class="modal_wrapper coupon_modal">
+                            <div class="modal_header">
+                                <div class="modal_title">
+                                    <div class="label">할인 쿠폰 받기</div>
+                                </div>
+                                <div class="modal_close"></div>
+                            </div>
+                            <div class="modal_body">
+                                <div class="coupon_list">
+    <ul>
+ <%
+ 	for(CouponDTO c : couponList){
+ %>		
+ 	<li>
+            <div class="coupon_left">
+                <div class="title"><%=c.getCouponName() %></div>
+                <div class="price"><%=c.getCouponPrice() %>원</div>
+                <div class="condition"><span>이용조건 확인하기</span><img src="https://ccimage.hellomarket.com/web/2019/item/btn_info_13x13_600_x2.png" alt="느낌표 이미지">
+                    <div class="history_coupon_condition"><%=c.getCouponTerms() %></div>
+                </div>
+            </div>
+            <div class="coupon_right" onclick= "updateForm(<%=c.getCouponIdx()%>)"><img src="../img/ico_download_white_x2.png" alt="다운로드 이미지"><span style="visibility:hidden"><%=c.getCouponIdx() %></span></div>
+        </li>
+        
+ <% 	
+ 	}
+ %>
+  <script>
+  
+	 function updateForm(c_idx){
+	 	$.ajax({
+	 		url : "coupon_action.jsp",
+	 		type : "POST",
+	 		cache : false,
+	 		dataType : "json",
+	 		data : "c_idx="+c_idx,
+	 		success: function(data){
+	 			$(".history_title coupon_history_title").html(data.c_idx);
+	 			$("#c_name").val(data.c_name);
+	 			$("#c_price").val(data.c_price);
+	 			$("#c_couponterms").val(data.c_couponterms);
+	 			$(".modal_close").css('display','none');
+	 			$(".ReactModalPortal").css('display','none');
+	 		},
+	 		
+	 		error : function(request,status,error){
+	 			 var msg = "ERROR : " + request.status + "<br>"
+				 console.log(msg);   
+	 		    }
+	 		
+	 	});
+	 	}
+	
+	 
+	 
+ 	
+ </script>
+
+    </ul>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
         
           <header class="">
       <div class="bar hide"></div>
@@ -263,10 +360,46 @@
                                                 <div class="history_coupon_period">유효기간</div>
                                                 <div class="history_coupon_available">이용조건</div>
                                             </li>
+                                            <script>
+												let indexNum = new Array();
+												$(".coupon_right").on('click',function(){
+													$(this).addClass("coupon_right_back");
+													$(this).html("<span>받기<br>완료</span>");
+												})
+											
+												
+											</script>
+				
+<%
+	UserDAO user = new UserDAO();
+	CouponDTO selectedCoupon = new CouponDTO();
+	int couponIdx = user.user_coupon(userId);
+	if(couponIdx == 0){
+%>
                                             <div>
+                                            
                                                 <div class="member_payment_title">보유한 쿠폰이 없습니다.</div>
                                                 <div class="member_payment_btn_box"></div>
                                             </div>
+
+<% 
+	}
+
+	else{
+		selectedCoupon = coupon.showReceivedCoupon(couponIdx);
+%>
+		<li class="description_history">
+	    <div class="history_left_main">
+	        <div class="history_title coupon_history_title"><%=selectedCoupon.getCouponName() %></div>
+	        <div class="history_sale_price coupon_history_sale_price"><%=selectedCoupon.getCouponPrice() %></div>
+	    </div>
+	    <div class="history_coupon_available"><span>이용조건 확인</span>
+	        <div class="history_coupon_condition"><%=selectedCoupon.getCouponTerms() %></div>
+	    </div>
+	</li>
+<% 
+	}
+%>
                                         </ul>
                                     </div>
                                     <div class="mobile_coupon_notice">
@@ -352,76 +485,7 @@
             </div>
         </div>
     </div>
-    <div class="ReactModalPortal" style="display: none;">
-        <div class="ReactModal__Overlay ReactModal__Overlay--after-open overlay" style="overflow: auto;">
-            <div class="ReactModal__Content ReactModal__Content--after-open modal_main" tabindex="-1" role="dialog">
-                <div class="modal_parent">
-                    <div class="modal_container">
-                        <div class="modal_wrapper popup_type2_modal">
-                            <div class="modal_body">
-                                <div class="title">유의사항</div>
-                                <div class="popup_type2_notice">
-                                    <ul>
-                                        <li><span class="dot_position">•</span><span class="description_position">쿠폰 종류에 따라 적용대상과 유효기간 등 조건이 상이합니다.</span></li>
-                                        <li><span class="dot_position">•</span><span class="description_position">쿠폰을 사용한 거래가 배송 전 주문취소 된 경우 유효기간 내 재발급 되며, 유효기간이 경과시 재발급이 불가합니다.</span></li>
-                                        <li><span class="dot_position">•</span><span class="description_position">당사 사정에 따라 사전고지 없이 제공중인 쿠폰 내용이 변경되거나 종료될 수 있습니다.</span></li>
-                                    </ul>
-                                </div>
-                                <div class="popup_type2_footer"><button type="button">확인</button></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	
 
-    <div class="ReactModalPortal" style="display: none;">
-        <div class="ReactModal__Overlay ReactModal__Overlay--after-open overlay" style="overflow: auto;">
-            <div class="ReactModal__Content ReactModal__Content--after-open modal_main" tabindex="-1" role="dialog">
-                <div class="modal_parent">
-                    <div class="modal_container">
-                        <div class="modal_wrapper coupon_modal">
-                            <div class="modal_header">
-                                <div class="modal_title">
-                                    <div class="label">할인 쿠폰 받기</div>
-                                </div>
-                                <div class="modal_close"></div>
-                            </div>
-                            <div class="modal_body">
-                                <div class="coupon_list">
-    <ul>
- <%
- 	for(CouponDTO c : couponList){
- %>		
- 	<li>
-            <div class="coupon_left">
-                <div class="title"><%=c.getCouponName() %></div>
-                <div class="price"><%=c.getCouponPrice() %>원</div>
-                <div class="condition"><span>이용조건 확인하기</span><img src="https://ccimage.hellomarket.com/web/2019/item/btn_info_13x13_600_x2.png" alt="느낌표 이미지">
-                    <div class="history_coupon_condition"><%=c.getCouponTerms() %></div>
-                </div>
-            </div>
-            <div class="coupon_right"><img src="../img/ico_download_white_x2.png" alt="다운로드 이미지"></div>
-        </li>
- <% 	
- 	}
- %>
- <script>
- 	if($(".coupon_right").hasClass("coupon_right_back")){
- 		console.log('d')
- 	}
- </script>
-    </ul>
-</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
         <script src="../js/coupon.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>

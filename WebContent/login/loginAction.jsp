@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="User.UserDAO"%>
+<%@ page import="User.UserDTO"%>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="User.UserDTO" scope="page"/>
@@ -17,6 +18,9 @@
 	<%
 	String userID = null;
 	String userNick = null;
+	String userProfile = null;
+	int sellerLevel = 0;
+	
 	if(session.getAttribute("userId") != null){
 		userID = (String) session.getAttribute("userId");
 		userNick = (String) session.getAttribute("userNick");
@@ -29,15 +33,19 @@
 		script.println("</script>"); 
 	}
 	UserDAO userDAO = new UserDAO();
+	UserDTO userDTO = new UserDTO();
 	int result = userDAO.login(user.getUserId(), user.getUserPass());
 	if(result==1){
 		PrintWriter script = response.getWriter();
 		userNick = userDAO.selectUserNick(user.getUserId());
+		userDTO = userDAO.profile(user.getUserId());
 		if(userNick.equals("no")){
 			script.println("<script>");
 			script.println("alert('뭔가 이상하네욤')");
 			script.println("</script>"); 
 		}
+		session.setAttribute("userProf", userDTO.getUserProf());
+		session.setAttribute("sellerLevel", userDTO.getSellerLevel());
 		session.setAttribute("userNick", userNick);
 		session.setAttribute("userId",user.getUserId());
 		script.println("<script>");

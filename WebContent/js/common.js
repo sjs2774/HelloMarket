@@ -86,6 +86,11 @@ $(function(){
             location.href = "join/signup.html"
         })
     }
+    function alarm_open(){
+    	$("#alarm_btn").on('click',function(){
+    		location.href = "/HelloMarket/alarm.jsp";
+    	})
+    }
    
     function init(){
         silde_up_nick();
@@ -93,6 +98,7 @@ $(function(){
         $(open_cat).on('click',open_category);
         searchbox()
         log_join()
+        alarm_open()
     }
     $(document)
     init();

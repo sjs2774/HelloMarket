@@ -35,17 +35,10 @@ $(function () {
         })
     }
     
-    function couponRecieve(){
-    	$(".coupon_right").on('click',function(){
-    		$(this).addClass("coupon_right_back");
-    		$(this).html("<span>받기<br>완료</span>")
-    	})
-    }
 
     function init() {
         cphd();
         reactopen();
-        couponRecieve();
     }
     init();
 })

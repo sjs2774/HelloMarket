@@ -35,6 +35,59 @@ public class UserDAO {
 		}
 		return -2;
 	}
+	public UserDTO profile(String userId) {
+		UserDTO userDTO = new UserDTO();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT user_prof,seller_level,user_ph from userlist where user_email = ?";
+		try {
+			conn = Dbconn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				userDTO.setUserProf(rs.getString("user_prof"));
+				userDTO.setSellerLevel(rs.getInt("seller_level"));
+				userDTO.setUserPh(rs.getInt("user_ph"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return userDTO;
+	}
+	
+	public void changeProfile(String userId,String changeProf) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "UPDATE userlist set user_prof =? where user_email =?";
+		try {
+			conn = Dbconn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, changeProf);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void changePhone(String userId,int changePhone) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "UPDATE userlist set user_ph =? where user_email =?";
+		try {
+			conn = Dbconn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, changePhone);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public String selectUserNick(String user_email) {
 		Connection conn = null;
@@ -111,5 +164,41 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void changeUserNick(String userId,String changeNick) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "UPDATE userlist set user_nick = ? where user_email=?";
+		try {
+			conn = Dbconn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, changeNick);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int user_coupon(String userId) {
+		int couponIdx=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "Select coupon_idx from userlist where user_email = ?";
+		try {
+			conn = Dbconn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				couponIdx = rs.getInt("coupon_idx");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return couponIdx;
 	}
 }

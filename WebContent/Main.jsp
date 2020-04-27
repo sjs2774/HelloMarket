@@ -54,7 +54,7 @@
     <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
     <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
             <div class="chat_cnt">4</div>
-        </a><a href="https://account.hellomarket.com/alarms" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
+        </a><a id ="alarm_btn" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
             <div class="alram_cnt">3</div>
         </a></div>
 </div>
@@ -68,11 +68,11 @@
                   <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
                 </div>
               </a>
-              <ul class="gnb_my_list"><a href="/s/@15979427?type=item">
+              <ul class="gnb_my_list"><a href="mystore/index.html">
                   <li class="gnb_my_list_first">내상점</li>
                 </a><a href="/m/hellopay.hm?type=seller&amp;status=open">
                   <li>헬로페이 거래내역</li>
-                </a><a href="/m/coupon">
+                </a><a href="mystore/coupon.jsp">
                   <li>할인쿠폰</li>
                 </a>
                 <li class="gnb_my_list_last">로그아웃</li>

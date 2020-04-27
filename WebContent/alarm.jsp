@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +9,9 @@
     <title>안녕마켓 : 알림</title>
     <link href="css/bed_chunk.css" rel="stylesheet">
 </head>
+<%
+	String userNick = (String) session.getAttribute("userNick");
+%>
 
 <body>
     <div id="__next">
@@ -22,14 +27,13 @@
                 <div class="header_logo">
                     <div class="log_box"><a href="https://www.hellomarket.com" target="_blank"
                             rel="noopener noreferrer"><img
-                                src="img/안녕마켓메인.png" class="logo"
+                                src="img/MarketMain.png" class="logo"
                                 alt="헬로마켓" width="115" height="28"></a></div>
                     <div class="profile_box"><a href="https://www.hellomarket.com/s/@15979427" target="_blank"
                             rel="noopener noreferrer">
                             <div class="info"><img
                                     src="img/img_apply_profile_4x_0419.png"
-                                    alt="프로필 사진"><span>n15979427
-                                    <!-- -->님</span></div>
+                                    alt="프로필 사진"><span><%=userNick %> 님</span></div>
                         </a></div>
                 </div>
             </section>
