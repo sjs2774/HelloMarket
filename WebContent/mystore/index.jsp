@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +23,7 @@
             <div class="bar hide"></div>
             <section class="header_top">
                 <div class="header_logo header_logo_s">
-                    <div class="log_box"><a href="/HelloMarket/Main.jsp"><img src="/HelloMarket/img/MarketMain.png" class="logo" alt="헬로마켓"><img
+                    <div class="log_box"><a href="/"><img src="../img/안녕마켓메인.png" class="logo" alt="헬로마켓"><img
                                 src="https://ccimage.hellomarket.com/web/2020/common/img_title_logo.png"
                                 class="mobile_logo" alt="헬로마켓"></a></div>
                     <div class="btn_box">
@@ -162,18 +164,26 @@
                                             <li class="cat_space"><a></a></li>
                                             <li class="cat_space"><a></a></li>
                                             <li class="cat_space"><a></a></li>
-                                            <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
-                            src="/HelloMarket/img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
-                            class="category_text">휴대폰, 테블릿</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
-                            src="/HelloMarket/img/cate_had0000.png" alt="뷰티" class="category_img"><span
-                            class="category_text">뷰티</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
-                            src="/HelloMarket/img/cate_haa0000.png" alt="여성의류" class="category_img"><span
-                            class="category_text">여성의류</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
-                            src="/HelloMarket/img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
-                            class="category_text">신발,가방,잡화</span></a></li>
+                                            <li class="category"><a class="cat_link"
+                                                    href="/search?category=HAK0000"><img
+                                                        src="https://ccimage.hellomarket.com/web/2018/common/category/cate_hak0000.png"
+                                                        alt="휴대폰, 테블릿" class="category_img"><span
+                                                        class="category_text">휴대폰, 테블릿</span></a></li>
+                                            <li class="category"><a class="cat_link"
+                                                    href="/search?category=HAD0000"><img
+                                                        src="https://ccimage.hellomarket.com/web/2018/common/category/cate_had0000.png"
+                                                        alt="뷰티" class="category_img"><span
+                                                        class="category_text">뷰티</span></a></li>
+                                            <li class="category"><a class="cat_link"
+                                                    href="/search?category=HAA0000"><img
+                                                        src="https://ccimage.hellomarket.com/web/2018/common/category/cate_haa0000.png"
+                                                        alt="여성의류" class="category_img"><span
+                                                        class="category_text">여성의류</span></a></li>
+                                            <li class="category"><a class="cat_link"
+                                                    href="/search?category=HAC0000"><img
+                                                        src="https://ccimage.hellomarket.com/web/2018/common/category/cate_hac0000.png"
+                                                        alt="신발,가방,잡화" class="category_img"><span
+                                                        class="category_text">신발,가방,잡화</span></a></li>
                                             <li class="category_blank"></li>
                                             <li class="category_blank"></li>
                                             <li class="category_blank"></li>
@@ -418,7 +428,7 @@
         </div>
     </div>
 </body>
-<script src="../js/common.js"></script>
+<script src="../js/common.jsv=<%=System.currentTimeMillis() %>"></script>
 <script src="../js/mystore_index.js"></script>
 
 </html>

@@ -270,16 +270,16 @@
                       <li class="cat_space"><a></a></li>
                       <li class="cat_space"><a></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
-                            src="img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
+                            src="/HelloMarket/img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
                             class="category_text">휴대폰, 테블릿</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
-                            src="img/cate_had0000.png" alt="뷰티" class="category_img"><span
+                            src="/HelloMarket/img/cate_had0000.png" alt="뷰티" class="category_img"><span
                             class="category_text">뷰티</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
-                            src="img/cate_haa0000.png" alt="여성의류" class="category_img"><span
+                            src="/HelloMarket/img/cate_haa0000.png" alt="여성의류" class="category_img"><span
                             class="category_text">여성의류</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
-                            src="img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
+                            src="/HelloMarket/img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
                             class="category_text">신발,가방,잡화</span></a></li>
                       <li class="category_blank"></li>
                       <li class="category_blank"></li>

@@ -25,7 +25,7 @@
         <header>
             <section class="header_top">
                 <div class="header_logo">
-                    <div class="log_box"><a href="https://www.hellomarket.com" target="_blank"
+                    <div class="log_box"><a href="Main.jsp" target="_blank"
                             rel="noopener noreferrer"><img
                                 src="img/MarketMain.png" class="logo"
                                 alt="헬로마켓" width="115" height="28"></a></div>

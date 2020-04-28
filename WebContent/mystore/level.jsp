@@ -17,6 +17,7 @@
 	String userNick = null;
 	String userProfile = null;
 	int sellerLevel = 0;
+	String levelName = null;
 	if (session.getAttribute("userId") != null){
 		userId = (String) session.getAttribute("userId");
 		userNick = (String) session.getAttribute("userNick");
@@ -24,6 +25,13 @@
 		sellerLevel = (int)session.getAttribute("sellerLevel");
 	}
 	
+	if(sellerLevel==1){
+		levelName = "화이트";
+	}else if(sellerLevel==2){
+		levelName ="블루";
+	}else{
+		levelName="브론즈";
+	}
 %>
       
         
@@ -57,9 +65,23 @@
 %>
           <div style="display: none;">
             <div class="gnb_my_lyr test_type"><a href="mystore/level.jsp">
-                <div class="gnb_my_member_level"><img class="gnb_my_member_level_img" src="../img/img_level_3_420x420.png"
-                    alt="뱃지 이미지">
-                  <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
+                <div class="gnb_my_member_level">
+<%
+		  if(sellerLevel==1){
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level1_30.png" alt="뱃지 이미지">
+<% 			  
+		  }else if(sellerLevel==2){
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level2_30.png" alt="뱃지 이미지">
+<%
+		  }else{
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level3_30.png" alt="뱃지 이미지">
+<% 
+		  }
+%>
+                  <div><span class="level_description">나의등급</span><span class="level_description_name"><%=levelName %></span></div>
                 </div>
               </a>
               <ul class="gnb_my_list"><a href="/s/@15979427?type=item">
@@ -164,16 +186,16 @@
                       <li class="cat_space"><a></a></li>
                       <li class="cat_space"><a></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
-                            src="img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
+                            src="/HelloMarket/img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
                             class="category_text">휴대폰, 테블릿</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
-                            src="img/cate_had0000.png" alt="뷰티" class="category_img"><span
+                            src="/HelloMarket/img/cate_had0000.png" alt="뷰티" class="category_img"><span
                             class="category_text">뷰티</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
-                            src="img/cate_haa0000.png" alt="여성의류" class="category_img"><span
+                            src="/HelloMarket/img/cate_haa0000.png" alt="여성의류" class="category_img"><span
                             class="category_text">여성의류</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
-                            src="img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
+                            src="/HelloMarket/img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
                             class="category_text">신발,가방,잡화</span></a></li>
                       <li class="category_blank"></li>
                       <li class="category_blank"></li>

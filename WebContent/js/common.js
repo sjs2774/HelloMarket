@@ -9,7 +9,7 @@ $(function(){
         
      })
     $(main_btn).on('click',function(){
-        location.href="../Main.jsp"
+        location.href="/HelloMarket/Main.jsp"
     })
     //오른쪽 상단 닉네임 클릭하면 nav 나옴 
     function slide_nick(){
@@ -91,8 +91,37 @@ $(function(){
     		location.href = "/HelloMarket/alarm.jsp";
     	})
     }
+    $(".gnb_my_list_first").on('click',function(){
+    	location.href = "/HelloMarket/mystore/index.jsp"
+    })
+    $(".gnb_my_list_second").on('click',function(){
+    	location.href = "/HelloMarket/mystore/coupon.jsp"
+    })
+    $(".gnb_my_lyr").on('click',function(){
+    	location.href= "/HelloMarket/mystore/level.jsp"
+    })
+    
+    
+    function sell(userId) {
+
+		if (userId != null) {
+	
+			location.href = "/HelloMarket/Sell/Sell.jsp";
+	
+		} else {
+	
+			alert("로그인해주세요!");
+			location.href = "/HelloMarket/login/login.html";
+	
+		}
+
+}
    
     function init(){
+    	$(".gnb_my_lyr").css('cursor','pointer');
+    	$(main_btn).css('cursor','pointer');
+    	$(".gnb_my_list_first").css('cursor','pointer');
+    	$(".gnb_my_list_second").css('cursor','pointer');
         silde_up_nick();
         $(nick_title).on('click',slide_nick)
         $(open_cat).on('click',open_category);

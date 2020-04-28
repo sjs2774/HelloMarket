@@ -17,27 +17,19 @@
 <%
 	String userId = null;
 	String userNick = null;
+	int sellerLevel = 0;
 	if (session.getAttribute("userId") != null){
 		userId = (String) session.getAttribute("userId");
 		userNick = (String) session.getAttribute("userNick");
+		sellerLevel = (int)session.getAttribute("sellerLevel");
 	}
 %>
   <div id="__next" style="height: auto !important;">
-    <div class="mobile_banner">
-      <div class="mobile_banner_wrapper"><img alt="앱으로하기 로고"
-          src="https://ccimage.hellomarket.com/web/2019/menu/img_mobile_top_banner_190516_01.png"
-          class="header_down_left"><img alt="앱으로하기"
-          src="https://ccimage.hellomarket.com/web/2019/menu/img_mobile_top_banner_190516_02.png"
-          class="header_down_right"></div>
-    </div>
-
     <header class="">
       <div class="bar hide"></div>
       <section class="header_top">
         <div class="header_logo header_logo_s">
-          <div class="log_box"><a href="./Main.html"><img src="img/MarketMain.png" class="logo" alt="헬로마켓"><img
-                src="https://ccimage.hellomarket.com/web/2020/common/img_title_logo.png" class="mobile_logo"
-                alt="헬로마켓"></a></div>
+          <div class="log_box"><img src="img/MarketMain.png" class="logo" alt="헬로마켓"></div>
 <%
 	if(userId == null ){
 %>
@@ -51,10 +43,17 @@
 	}else{
 %>
 		<div class="btn_box">
-    <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
-    <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-            <div class="chat_cnt">4</div>
-        </a><a id ="alarm_btn" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
+    <div class="nick">
+    	<img src="/HelloMarket/img/img_default_profile_60x60.png" width="36" height="36" alt="<%=userNick %>의 프로필 사진" class="profile_img">
+    	<span class="nick_title"><%=userNick %>님</span>
+    	</div>
+    <div class="notification_box">
+    	<a href="" target="_blank" rel="noopener noreferrer">
+    		<img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
+        	<div class="chat_cnt">4</div>
+        </a>
+        <a id ="alarm_btn" target="_blank">
+        	<img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
             <div class="alram_cnt">3</div>
         </a></div>
 </div>
@@ -62,20 +61,29 @@
 	}
 %>
           <div style="display: none;">
-            <div class="gnb_my_lyr test_type"><a href="mystore/level.jsp">
-                <div class="gnb_my_member_level"><img class="gnb_my_member_level_img" src="img/img_level_3_420x420.png"
-                    alt="뱃지 이미지">
+            <div class="gnb_my_lyr test_type">
+                <div class="gnb_my_member_level">
+                <%
+	if(sellerLevel==1){
+%>
+		<img class="gnb_my_member_level_img" src="img/img_level1_30.png">
+<% 
+	}else if(sellerLevel ==2){
+%>
+		<img class="gnb_my_member_level_img" src="img/img_level2_30.png">
+<% 
+	}else{
+%>
+		<img class="gnb_my_member_level_img" src="img/img_level3_30.png">
+<% 
+	}
+%>
                   <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
                 </div>
-              </a>
-              <ul class="gnb_my_list"><a href="mystore/index.html">
+              <ul class="gnb_my_list">
                   <li class="gnb_my_list_first">내상점</li>
-                </a><a href="/m/hellopay.hm?type=seller&amp;status=open">
-                  <li>헬로페이 거래내역</li>
-                </a><a href="mystore/coupon.jsp">
-                  <li>할인쿠폰</li>
-                </a>
-                <li class="gnb_my_list_last">로그아웃</li>
+                  <li class="gnb_my_list_second">할인쿠폰</li>
+                  <li class="gnb_my_list_last">로그아웃</li>
               </ul>
             </div>
           </div>
@@ -132,15 +140,6 @@
               <span for="cat_checkbox" class="selectbox">카테고리</span>
               <div style="display: none;" id="category_display">
                 <div class="cat_list_box left_slidein">
-                  <div class="mobile_login_wrapper">
-                    <div class="btn_close_wrapper"><input type="checkbox" class="close_checkbox chkbox1" id="btnClose"
-                        name="btnClose"><button type="button" class="btn_close" for="btnClose">닫기</button></div>
-                    <div class="member_info"><a class="nick" href="/s/@15979427?tab=item">
-                        <div class="profile_wrapper"><img src="img/img_default_profile_60x60.png"
-                            alt="n15979427의 프로필 사진" id="loginProfileImg" class="profile_img"></div>
-                        <div class="member_info_txt">n15979427</div>
-                      </a></div>
-                  </div>
                   <div class="mobile_nav">
                     <div class="cat_avt">
                       <ul class="cat_avt_top">
@@ -170,16 +169,16 @@
                       <li class="cat_space"><a></a></li>
                       <li class="cat_space"><a></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
-                            src="img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
+                            src="/HelloMarket/img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
                             class="category_text">휴대폰, 테블릿</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
-                            src="img/cate_had0000.png" alt="뷰티" class="category_img"><span
+                            src="/HelloMarket/img/cate_had0000.png" alt="뷰티" class="category_img"><span
                             class="category_text">뷰티</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
-                            src="img/cate_haa0000.png" alt="여성의류" class="category_img"><span
+                            src="/HelloMarket/img/cate_haa0000.png" alt="여성의류" class="category_img"><span
                             class="category_text">여성의류</span></a></li>
                       <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
-                            src="img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
+                            src="/HelloMarket/img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
                             class="category_text">신발,가방,잡화</span></a></li>
                       <li class="category_blank"></li>
                       <li class="category_blank"></li>
@@ -206,16 +205,16 @@
               </div>
             </div>
           </div>
-          <div class="sellimg_sub_box header_wrapper_sub">
-            <div class="selling_bot"><img src="img/ico_sell_camera_x2.png" alt="판매하기 이미지" class="selling_bot_img"><span
+          <div class="sellimg_sub_box header_wrapper_sub" onclick="sell(<%=userId%>)">
+            <div class="selling_bot"><img src="/HelloMarket/img/ico_sell_camera_x2.png" alt="판매하기 이미지" class="selling_bot_img"><span
                 class="selling_bot_text">판매하기</span></div>
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
               <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
               <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+              <li><a href="/HelloMarket/ad/index.html" target="_blank" rel="noopener noreferrer"><img
+                    src="/HelloMarket/img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
             </ul>
           </div>
         </div>
