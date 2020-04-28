@@ -12,229 +12,31 @@
   <title>상품 등록 | 헬로마켓 - 100% 안전한 중고거래 장터</title>
   <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
   <link href="/HelloMarket/css/chunk.css" rel="stylesheet" type="text/css">
+  <link href="/HelloMarket/css/sell.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script src="/HelloMarket/js/postcode.js"></script>
-  <style>
-    @media all and (max-width: 800px) {
-      img {
-        width: 100%;
-      }
-    }
     
-   #fileflow { display:none; } 
-   #fileflow01 { display:none; } 
-   #fileflow02 { display:none; } 
-   #fileflow03 { display:none; } 
-
-  </style>
-
-  <style id="__jsx-2573731215">
-    #nprogress {
-      pointer-events: none;
-    }
-
-    #nprogress .bar {
-      background: #2299DD;
-      position: fixed;
-      z-index: 1031;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-    }
-
-    #nprogress .peg {
-      display: block;
-      position: absolute;
-      right: 0px;
-      width: 100px;
-      height: 100%;
-      box-shadow: 0 0 10px #2299DD, 0 0 5px #2299DD;
-      opacity: 1;
-      -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-      -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-      transform: rotate(3deg) translate(0px, -4px);
-    }
-
-    #nprogress .spinner {
-      display: none;
-      position: fixed;
-      z-index: 1031;
-      top: 15px;
-      right: 15px;
-    }
-
-    #nprogress .spinner-icon {
-      width: 18px;
-      height: 18px;
-      box-sizing: border-box;
-      border: solid 2px transparent;
-      border-top-color: #2299DD;
-      border-left-color: #2299DD;
-      border-radius: 50%;
-      -webkit-animation: nprogresss-spinner 400ms linear infinite;
-      -webkit-animation: nprogress-spinner 400ms linear infinite;
-      animation: nprogress-spinner 400ms linear infinite;
-    }
-
-    .nprogress-custom-parent {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .nprogress-custom-parent #nprogress .spinner,
-    .nprogress-custom-parent #nprogress .bar {
-      position: absolute;
-    }
-
-    @-webkit-keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-
-    @-webkit-keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-      }
-    }
-  </style>
-  <style id="__jsx-1471488780">
-    #nprogress {
-      pointer-events: none;
-    }
-
-    #nprogress .bar {
-      background: #2299DD;
-      position: fixed;
-      z-index: 1031;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-    }
-
-    #nprogress .peg {
-      display: block;
-      position: absolute;
-      right: 0px;
-      width: 100px;
-      height: 100%;
-      box-shadow: 0 0 10px #2299DD, 0 0 5px #2299DD;
-      opacity: 1;
-      -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-      -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-      transform: rotate(3deg) translate(0px, -4px);
-    }
-
-    #nprogress .spinner {
-      display: block;
-      position: fixed;
-      z-index: 1031;
-      top: 15px;
-      right: 15px;
-    }
-
-    #nprogress .spinner-icon {
-      width: 18px;
-      height: 18px;
-      box-sizing: border-box;
-      border: solid 2px transparent;
-      border-top-color: #2299DD;
-      border-left-color: #2299DD;
-      border-radius: 50%;
-      -webkit-animation: nprogresss-spinner 400ms linear infinite;
-      -webkit-animation: nprogress-spinner 400ms linear infinite;
-      animation: nprogress-spinner 400ms linear infinite;
-    }
-
-    .nprogress-custom-parent {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .nprogress-custom-parent #nprogress .spinner,
-    .nprogress-custom-parent #nprogress .bar {
-      position: absolute;
-    }
-
-    @-webkit-keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-
-    @-webkit-keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes nprogress-spinner {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-      }
-    }
-  </style>
 </head>
 
 <body>
  <%
-   String userId = null;
+    String userId = null;
+	String userNick = null;
+	String levelName = null;
+	int sellerLevel = 0;
    if (session.getAttribute("userId") != null){
       userId = (String) session.getAttribute("userId");
+      userNick = (String) session.getAttribute("userNick");
+      sellerLevel = (int)session.getAttribute("sellerLevel");
    }
+   if(sellerLevel==1){
+		levelName = "화이트";
+	}else if(sellerLevel==2){
+		levelName ="블루";
+	}else{
+		levelName="브론즈";
+	}
 %>
   <div id="__next" style="height: auto !important;">
     <div class="mobile_banner">
@@ -256,17 +58,15 @@
 <%
    if(userId == null ){
 %>
-          <div class="btn_box">
-          <a class="btn_login_box">
-          <button class="login_btn"><a href="../login/login.html">로그인</a></button>
-          </a><a class="btn_signup_box"><button class="signup_btn"><a href="../join/signup.html">회원가입</a></button></a><a href="/msearch">
-              <div class="notification_box"></div>
-            </a></div>
+   <script>
+   		alert('로그인을 먼저 해주세요.');
+   		location.href="/HelloMarket/login/login.html";
+   </script>
 <%
    }else{
 %>
    <div class="btn_box">
-       <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title">n15979427님</span></div>
+       <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
          <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
         <div class="chat_cnt">4</div>
         </a><a href="https://account.hellomarket.com/alarms" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
@@ -278,11 +78,25 @@
 %>
                     <div style="display: none;">
                         <div class="gnb_my_lyr test_type"><a href="/m/level.hm">
-                                <div class="gnb_my_member_level"><img class="gnb_my_member_level_img"
-                                        src="https://ccimage.hellomarket.com/web/2019/member/img_level_1_x2.png"
-                                        alt="뱃지 이미지">
+                                <div class="gnb_my_member_level">
+ <%
+ 
+	if(sellerLevel==1){
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level1_30.png">
+<% 
+	}else if(sellerLevel ==2){
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level2_30.png">
+<% 
+	}else{
+%>
+		<img class="gnb_my_member_level_img" src="/HelloMarket/img/img_level3_30.png">
+<% 
+	}
+%>
                                     <div><span class="level_description">나의등급</span><span
-                                            class="level_description_name">화이트</span></div>
+                                            class="level_description_name"><%=levelName %></span></div>
                                 </div>
                             </a>
                             <ul class="gnb_my_list"><a href="/s/@15979427?type=item">
@@ -481,7 +295,7 @@
                 <div>상품 등록</div>
               </div>
             </div>
-   <form method="post" action="Sell_ok.jsp" enctype="multipart/form-data">
+  			 <form method="post" action="sell_ok.jsp" enctype="multipart/form-data">
             <div class="regist_box">
               <div class="description">
                 <dl id="mainDiv">
@@ -490,13 +304,14 @@
                     <div class="hellopay_box_area" > <!--일단 얘는 이름 맞는거 같은데   -->
                       <ul>
                         <li class="">
-                       <input type="checkbox" id ="deal_m" name="deal_m1" value="헬로페이">헬로페이</li>
+                       <input type="checkbox" id ="deal_m" name="deal_m1" value="택배거래">택배거래</li>
                         <li >
                         <input type="checkbox"  id ="deal_m" name="deal_m2" value="직거래">직거래</li>
                       </ul>
                     </div>
-                    <div class="hellopay_direct_notice"><span class="normal_notice">헬로페이만 선택 후 등록시 노출, 할인 혜택
-                        지원으로 빠른 판매를 도와드립니다.</span></div>
+                    <div class="hellopay_direct_notice">
+                    	<span class="normal_notice">택배거래보다는 직거래를 추천드립니다.</span>
+                    </div>
                   </dd>
                 </dl>
                 <dl class="regist_image_dl" id="registImage">
@@ -662,7 +477,7 @@
             </div>
           </div>
         </div>
-      </div>
+      	</div>
       </form>
     </section>
     <div class="footer">

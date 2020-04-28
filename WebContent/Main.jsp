@@ -18,11 +18,19 @@
 	String userId = null;
 	String userNick = null;
 	int sellerLevel = 0;
+	String levelName = null;
 	if (session.getAttribute("userId") != null){
 		userId = (String) session.getAttribute("userId");
 		userNick = (String) session.getAttribute("userNick");
 		sellerLevel = (int)session.getAttribute("sellerLevel");
 	}
+	 if(sellerLevel==1){
+			levelName = "화이트";
+		}else if(sellerLevel==2){
+			levelName ="블루";
+		}else{
+			levelName="브론즈";
+		}
 %>
   <div id="__next" style="height: auto !important;">
     <header class="">
@@ -78,7 +86,7 @@
 <% 
 	}
 %>
-                  <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
+                  <div><span class="level_description">나의등급</span><span class="level_description_name"><%=levelName %></span></div>
                 </div>
               <ul class="gnb_my_list">
                   <li class="gnb_my_list_first">내상점</li>
@@ -205,7 +213,23 @@
               </div>
             </div>
           </div>
-          <div class="sellimg_sub_box header_wrapper_sub" onclick="sell(<%=userId%>)">
+          <div class="sellimg_sub_box header_wrapper_sub" onclick="sellimg('<%=userId%>')">
+   			<script>
+   		    function sellimg(userId) {
+
+   				if (userId != null) {
+   			
+   					location.href = "/HelloMarket/sell/sell.jsp";
+   			
+   				} else {
+   			
+   					alert("로그인해주세요!");
+   					location.href = "/HelloMarket/login/login.html";
+   			
+   				}
+
+   		}
+   			</script>
             <div class="selling_bot"><img src="/HelloMarket/img/ico_sell_camera_x2.png" alt="판매하기 이미지" class="selling_bot_img"><span
                 class="selling_bot_text">판매하기</span></div>
           </div>

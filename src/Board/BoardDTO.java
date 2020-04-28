@@ -1,7 +1,7 @@
 package Board;
 
 public class BoardDTO {
-    private int p_idx;
+   private int p_idx;
    private String user_email;
    private String deal_m1;
    private String deal_m2;
@@ -18,10 +18,9 @@ public class BoardDTO {
    private String p_status1;
    private String p_status2;
    private String p_transac_loc;
-
    private String member_nick;
    private String member_level;
-    private String member_star;
+   private String member_star;
 	public int getP_idx() {
 		return p_idx;
 	}

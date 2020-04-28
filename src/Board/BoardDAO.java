@@ -18,7 +18,6 @@ public class BoardDAO {
    private PreparedStatement pstmt;
    private ResultSet rs;
    DataSource ds;
-   String[] generatedColumns = {"p_idx"};
    
    public BoardDAO() {
       try {
@@ -31,27 +30,22 @@ public class BoardDAO {
       
    public int registBoard(BoardDTO boarddto) {
 	   
-	   System.out.println("sellboard2에 들어가는지 보자"); // 지금 이게 작동을 안해요 이게 뭔 일인지 모르겠는데 계속 sellboard_1로 들어가서... 
-	      
-	      
-	      
 	      try {
 	    	 conn = Dbconn.getConnection();
 	    	 
-	    	 String sql = "insert into sellboard_2(user_email, deal_m1, p_image1_path, p_image1_orig_name, p_title, p_m_catagory, p_s_catagory, p_description, p_trade_kind, p_price, p_delivery, p_exchange, p_status1, p_status2, p_transac_loc) " + 
+	    	 String sql = "insert into sellboard(user_email, deal_m1, p_image1_path, p_image1_orig_name, p_title, p_m_catagory, p_s_catagory, p_description, p_trade_kind, p_price, p_delivery, p_exchange, p_status1, p_status2, p_transac_loc) " + 
 			            "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	 
-	    	 pstmt = conn.prepareStatement(sql, generatedColumns);
+//	    	 pstmt = conn.prepareStatement(sql, generatedColumns);
 	         pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	         
 	         pstmt.setString(1, boarddto.getUser_email());
-	         System.out.println(boarddto.getUser_email());
 	         pstmt.setString(2, boarddto.getDeal_m1()+ boarddto.getDeal_m2());
 	         pstmt.setString(3, boarddto.getP_image1_path());
 	         pstmt.setString(4, boarddto.getP_image1_orig_name());
-	         System.out.println(boarddto.getP_image1_orig_name());
 	         pstmt.setString(5, boarddto.getP_title());
 	         pstmt.setString(6, boarddto.getP_m_category());
+	         System.out.println("오");
 	         pstmt.setString(7, boarddto.getP_s_category());
 	         pstmt.setString(8, boarddto.getP_description());
 	         pstmt.setString(9, boarddto.getP_trade_kind());
@@ -66,14 +60,14 @@ public class BoardDAO {
 	        
 	         try (ResultSet geneResultKey = pstmt.getGeneratedKeys()){
 	            if(geneResultKey.next()) {
+	            	
 	               boarddto.setP_idx(geneResultKey.getInt("p_idx"));
 	            }
 	            
-	            //System.out.println("boarddto : " + boarddto);
 	         }
 	         
 	         if(rows>=1) {
-		        	boarddto = this.updateFilePath(boarddto);
+//		        	boarddto = this.updateFilePath(boarddto);
 		        	 System.out.println("db 성공"); 
 		         }
 	      
@@ -91,14 +85,14 @@ public class BoardDAO {
 		
 		try {
 			conn = Dbconn.getConnection();
-			String sql = "UPDATE sellboard_2 SET p_image1_path = ? WHERE p_idx = ? ";
+			String sql = "UPDATE sellboard SET p_image1_path = ? WHERE p_idx = ? ";
 			pstmt = conn.prepareStatement(sql);
 			
 			
 			String tmp = "/"+FileService.getToday()+"/"+boarddto.getP_idx()+".png";
 			boarddto.setP_image1_path(tmp);
 			pstmt.setString(1, tmp);
-			pstmt.setInt(2, boarddto.getP_idx());
+			pstmt.setString(2, boarddto.getUser_email());
 			pstmt.executeUpdate();
 			
 		}catch (Exception e) {
@@ -120,7 +114,7 @@ public class BoardDAO {
            try {
 
               conn = Dbconn.getConnection();
-              String sql = "update sellboard_2 set deal_m=? p_image1_orig_name=? p_title=? p_m_category=?, p_s_category=?,  p_description=?  p_trade_kind=?, p_price=?, p_delivery=?, p_exchage=?, p_status1=?, p_status2=?, p_transac_loc=? where p_idx=?";
+              String sql = "update sellboard set deal_m=? p_image1_orig_name=? p_title=? p_m_category=?, p_s_category=?,  p_description=?  p_trade_kind=?, p_price=?, p_delivery=?, p_exchage=?, p_status1=?, p_status2=?, p_transac_loc=? where p_idx=?";
               pstmt = conn.prepareStatement(sql);
               pstmt.setString(1, boarddto.getDeal_m1()+ boarddto.getDeal_m2());
               pstmt.setString(2, boarddto.getP_image1_orig_name());

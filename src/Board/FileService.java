@@ -9,7 +9,7 @@ import Board.*;
 
 public class FileService {
 	private BoardDAO boarddao = null;
-	public static String SAVE_PATH = "c:/upload"; // 저장할 장소
+	public static String SAVE_PATH = "/Users/kyrie/Desktop/Java/WorkSpace/HelloMarket/WebContent/upload/img"; // 저장할 장소
 
 	
 	public FileService() {

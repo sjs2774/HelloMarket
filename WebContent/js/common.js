@@ -102,20 +102,7 @@ $(function(){
     })
     
     
-    function sell(userId) {
 
-		if (userId != null) {
-	
-			location.href = "/HelloMarket/Sell/Sell.jsp";
-	
-		} else {
-	
-			alert("로그인해주세요!");
-			location.href = "/HelloMarket/login/login.html";
-	
-		}
-
-}
    
     function init(){
     	$(".gnb_my_lyr").css('cursor','pointer');
@@ -129,6 +116,5 @@ $(function(){
         log_join()
         alarm_open()
     }
-    $(document)
     init();
 })
