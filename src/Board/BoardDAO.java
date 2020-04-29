@@ -33,19 +33,17 @@ public class BoardDAO {
 	      try {
 	    	 conn = Dbconn.getConnection();
 	    	 
-	    	 String sql = "insert into sellboard(user_email, deal_m1, p_image1_path, p_image1_orig_name, p_title, p_m_catagory, p_s_catagory, p_description, p_trade_kind, p_price, p_delivery, p_exchange, p_status1, p_status2, p_transac_loc) " + 
+	    	 String sql = "insert into sellboard(user_nick, deal_m1, p_image1_path, p_image1_orig_name, p_title, p_m_catagory, p_s_catagory, p_description, p_trade_kind, p_price, p_delivery, p_exchange, p_status1, p_status2, p_transac_loc) " + 
 			            "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	 
-//	    	 pstmt = conn.prepareStatement(sql, generatedColumns);
 	         pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	         
-	         pstmt.setString(1, boarddto.getUser_email());
+	         pstmt.setString(1, boarddto.getUserNick());
 	         pstmt.setString(2, boarddto.getDeal_m1()+ boarddto.getDeal_m2());
 	         pstmt.setString(3, boarddto.getP_image1_path());
 	         pstmt.setString(4, boarddto.getP_image1_orig_name());
 	         pstmt.setString(5, boarddto.getP_title());
 	         pstmt.setString(6, boarddto.getP_m_category());
-	         System.out.println("오");
 	         pstmt.setString(7, boarddto.getP_s_category());
 	         pstmt.setString(8, boarddto.getP_description());
 	         pstmt.setString(9, boarddto.getP_trade_kind());
@@ -58,16 +56,12 @@ public class BoardDAO {
 	         
 	         int rows = pstmt.executeUpdate();
 	        
-	         try (ResultSet geneResultKey = pstmt.getGeneratedKeys()){
+	         ResultSet geneResultKey = pstmt.getGeneratedKeys();
 	            if(geneResultKey.next()) {
 	            	
-	               boarddto.setP_idx(geneResultKey.getInt("p_idx"));
-	            }
-	            
-	         }
-	         
+	               boarddto.setP_idx(geneResultKey.getInt(1));
+	            }    
 	         if(rows>=1) {
-//		        	boarddto = this.updateFilePath(boarddto);
 		        	 System.out.println("db 성공"); 
 		         }
 	      
@@ -78,160 +72,38 @@ public class BoardDAO {
 	return 0;
 	     
 	   }
-	   
-   	public BoardDTO updateFilePath(BoardDTO boarddto) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = Dbconn.getConnection();
-			String sql = "UPDATE sellboard SET p_image1_path = ? WHERE p_idx = ? ";
-			pstmt = conn.prepareStatement(sql);
-			
-			
-			String tmp = "/"+FileService.getToday()+"/"+boarddto.getP_idx()+".png";
-			boarddto.setP_image1_path(tmp);
-			pstmt.setString(1, tmp);
-			pstmt.setString(2, boarddto.getUser_email());
-			pstmt.executeUpdate();
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			Dbconn.close(conn, pstmt);
-		}
-		
-		return boarddto;
-   	}
-   
-   
-   
-    public Integer updateBoard(BoardDTO boarddto) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        int rows = 0;
-     
-           try {
-
-              conn = Dbconn.getConnection();
-              String sql = "update sellboard set deal_m=? p_image1_orig_name=? p_title=? p_m_category=?, p_s_category=?,  p_description=?  p_trade_kind=?, p_price=?, p_delivery=?, p_exchage=?, p_status1=?, p_status2=?, p_transac_loc=? where p_idx=?";
-              pstmt = conn.prepareStatement(sql);
-              pstmt.setString(1, boarddto.getDeal_m1()+ boarddto.getDeal_m2());
-              pstmt.setString(2, boarddto.getP_image1_orig_name());
-              pstmt.setString(3, boarddto.getP_title());
-              pstmt.setString(4, boarddto.getP_m_category());
-              pstmt.setString(5, boarddto.getP_s_category());
-              pstmt.setString(6, boarddto.getP_description());
-              pstmt.setString(7, boarddto.getP_trade_kind());
-              pstmt.setString(8, boarddto.getP_price());
-              pstmt.setString(9, boarddto.getP_delivery());
-              pstmt.setString(10, boarddto.getP_exchange());
-              pstmt.setString(11, boarddto.getP_status1());
-              pstmt.setString(12, boarddto.getP_status2());
-              pstmt.setString(13, boarddto.getP_transac_loc());
-              
-              try (ResultSet geneResultKey = pstmt.getGeneratedKeys()){
-                 if(geneResultKey.next()) {
-                    boarddto.setP_idx(geneResultKey.getInt("id"));
-                 }
-              }
-              rows=pstmt.executeUpdate();
-              
-        }catch(Exception e) {
-           e.printStackTrace();
-
-        }finally {
-           Dbconn.close(conn, pstmt);
-        }
-        return rows;
-     }
+	
    
 
-   public List<BoardDTO> mainShowList(int page, int limit){//보이는거
-      List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-      Connection conn = null;
-      PreparedStatement pstmt = null;
-      ResultSet rs = null;
-      
-      int startrow = (page-1)*12+1;
-      int endrow = startrow + limit -1;
-      
-      try {
-         conn = Dbconn.getConnection();
-         String sql = "select p_idx, p_image1_orig_name, p_title, p_price from sellboard order by p_idx desc limit ?,?";
-         pstmt = conn.prepareStatement(sql);
-         pstmt.setInt(1, startrow);
-         pstmt.setInt(2, endrow);  
-         rs = pstmt.executeQuery();
-         while(rs.next()) {
-            BoardDTO boarddto = new BoardDTO();
-            boarddto.setP_idx(rs.getInt("p_idx"));
-            boarddto.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
-            boarddto.setP_title(rs.getString("p_title"));
-            boarddto.setP_price(rs.getString("p_price"));
-            boardList.add(boarddto);
-         }
-      }catch(Exception e) {
-         e.printStackTrace();
-      }finally {
-         Dbconn.close(conn, pstmt, rs);
-      }
-      return boardList;
-   }
-   
-      public List<BoardDTO> clickCategory(String m_category, int page, int limit) {//클릭시 리스트형식
-            Connection conn = null;
-            PreparedStatement pstmt = null;
-            ResultSet rs = null;
-
-            int startrow = (page-1)*12+1;
-            int endrow = startrow + limit -1;
-            
-            List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-            try {
-               conn = Dbconn.getConnection();
-               String sql = "select p_idx, p_image1_orig_name, p_title, p_price from sellboard order by p_idx desc where p_m_catagory=? limit ?,?";
-               pstmt = conn.prepareStatement(sql);
-               pstmt.setString(1, m_category);
-              pstmt.setInt(2, startrow);
-            pstmt.setInt(3, endrow);  
-               rs = pstmt.executeQuery();
-               while(rs.next()) {
-                  BoardDTO boarddto = new BoardDTO();
-                  boarddto.setP_idx(rs.getInt("p_idx"));
-               boarddto.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
-               boarddto.setP_title(rs.getString("p_title"));
-               boarddto.setP_price(rs.getString("p_price"));
-                  boardList.add(boarddto);
-               }
-            }catch(Exception e) {
-               e.printStackTrace();
-            }finally {
-               Dbconn.close(conn, pstmt, rs);
-            }
-            return boardList;
-         }
-         
-   
-   
-    public int getListCount(){
-        int x =0;
-
-        try {
-            conn = ds.getConnection();
-            pstmt= conn.prepareStatement("select count(*) from BOARDTABLE");
-            rs = pstmt.executeQuery();
-
-            if(rs.next()){
-                x=rs.getInt(1);
-            }
-        } catch (Exception ex){
-            System.out.println("getListCount 실패 : "+ex);
-        } finally {
-            Dbconn.close(conn, pstmt, rs);
-        }
-        return x;
+    public List<BoardDTO> showAllItem(){
+    	List<BoardDTO> board = new ArrayList<BoardDTO>();
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	
+    	try {
+    		conn = Dbconn.getConnection();
+    		String sql ="select p_idx,p_title,p_price,p_image1_orig_name,p_image1_path from sellboard";
+    		pstmt = conn.prepareStatement(sql);
+    		rs = pstmt.executeQuery();
+    		while(rs.next()) {
+    			BoardDTO boardDTO = new BoardDTO();
+    			boardDTO.setP_idx(rs.getInt("p_idx"));
+    			boardDTO.setP_title(rs.getString("p_title"));
+    			boardDTO.setP_price(rs.getString("p_price"));
+    			boardDTO.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
+    			boardDTO.setP_image1_path(rs.getString("p_image1_path"));
+    			board.add(boardDTO);
+    		}
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return board;
+    	
     }
-      
-      
+   
+
+ 
+   
+   
 }

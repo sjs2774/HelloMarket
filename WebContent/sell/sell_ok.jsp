@@ -3,7 +3,6 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<%@page import="Board.FileService"%>
 <%@page import="java.io.File"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -16,11 +15,11 @@
 <jsp:useBean id="boardDAO" class="Board.BoardDAO"/>
 
 <%
-    String userId = (String)session.getAttribute("userId");
+    String userNick = (String)session.getAttribute("userNick");	
 
-	FileService fs = new FileService();
+	String realName="";
 	int maxSize = 10 * 1024 * 1024; // 10MB
-	String savePath = application.getRealPath("/");
+	String savePath = "/Users/kyrie/Desktop/Java/WorkSpace/HelloMarket/WebContent/upload/img/";
 	System.out.println("현재경로 : " + savePath);
 	String format = "UTF-8";
 	String uploadFile = "";
@@ -33,15 +32,16 @@
 		
 		uploadFile = multi.getFilesystemName("fileflow01"); // form의 input file객체이며, 실제로 업로드된 파일명 (맞다)
 		
+		
 		System.out.println(uploadFile);
 	
-		File file1 = new File(savePath + "/" + uploadFile);
+		File file1 = new File(savePath + uploadFile);
 		
 		response.sendRedirect("/HelloMarket/Main.jsp"); // 메인으로 가나 보자 (이거 이제 나중에 제품 리스트로 가는 걸로 바꿔요)
 		
 		
 	   	BoardDTO boarddto = new BoardDTO();
-	    String user_email = userId;
+	    String user_Nick = userNick;
 	    String deal_m1 = multi.getParameter("deal_m1");
 	    String deal_m2 = multi.getParameter("deal_m2");
 	    String p_image1_path = savePath;
@@ -58,7 +58,7 @@
 	    String p_transac_loc = multi.getParameter("p_transac_loc");
 	   
 	    
-	    boarddto.setUser_email(user_email);
+	    boarddto.setUserNick(user_Nick);
 	
 	    boarddto.setDeal_m1(deal_m1);
 	    boarddto.setDeal_m2(deal_m2);
@@ -75,7 +75,6 @@
 	    boarddto.setP_status1(p_status1);
 	    boarddto.setP_status2(p_status2);
 	    boarddto.setP_transac_loc(p_transac_loc);
-	 	System.out.println(boarddto.getUser_email());
 	    int num = boardDAO.registBoard(boarddto);
 	      
       if(num>=1){

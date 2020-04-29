@@ -115,12 +115,13 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		UserDAO setUser_nick = new UserDAO();
-		String sql = "INSERT INTO userlist(user_email,user_pwd) values(?,MD5(?))";
+		String sql = "INSERT INTO userlist(user_email,user_pwd,user_nick) values(?,MD5(?),?)";
 		try {
 			conn = Dbconn.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getUserId());
 			pstmt.setString(2, user.getUserPass());
+			pstmt.setString(3, "default");
 			pstmt.executeUpdate();
 			setUser_nick.set_userNick(user);
 			return 0;

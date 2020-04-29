@@ -91,15 +91,19 @@ $(function(){
     		location.href = "/HelloMarket/alarm.jsp";
     	})
     }
+    $(".gnb_my_member_level").on('click',function(){
+    	location.href= "/HelloMarket/mystore/level.jsp"
+    	event.stopImmedidatePropagation();
+    })
     $(".gnb_my_list_first").on('click',function(){
     	location.href = "/HelloMarket/mystore/index.jsp"
+    	event.stopImmedidatePropagation();
     })
     $(".gnb_my_list_second").on('click',function(){
     	location.href = "/HelloMarket/mystore/coupon.jsp"
+    	event.stopImmedidatePropagation();
     })
-    $(".gnb_my_lyr").on('click',function(){
-    	location.href= "/HelloMarket/mystore/level.jsp"
-    })
+
     
     
 
@@ -107,8 +111,6 @@ $(function(){
     function init(){
     	$(".gnb_my_lyr").css('cursor','pointer');
     	$(main_btn).css('cursor','pointer');
-    	$(".gnb_my_list_first").css('cursor','pointer');
-    	$(".gnb_my_list_second").css('cursor','pointer');
         silde_up_nick();
         $(nick_title).on('click',slide_nick)
         $(open_cat).on('click',open_category);
