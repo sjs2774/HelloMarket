@@ -117,6 +117,34 @@ $(function(){
 
         });
     }
+    $("#upProfile").on("click",function(){
+    	console.log("this");
+    	$("#upFile").click();
+    })
+    
+    $("#upFile").change(function(e){
+    	const formData = new FormData($('#form')[0]);
+
+    	
+    	$.ajax({
+    		url : '/HelloMarket/mystore/imgChange_ok.jsp',
+            type : 'POST',
+            enctype : 'multipart/form-data',	
+            data : formData,
+            contentType : false,
+            processData : false,
+            success : function(data){
+            	console.log('suc');
+
+             },
+             error : function(request,status,error){
+                 var msg = "ERROR : " + request.status + "<br>"
+                console.log(msg);   
+                }
+
+
+    	})
+    })
 
     function init(){
         nickchange();

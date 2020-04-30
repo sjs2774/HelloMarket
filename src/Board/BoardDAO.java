@@ -101,6 +101,87 @@ public class BoardDAO {
     	return board;
     	
     }
+    public BoardDTO showThisItem(int p_idx){
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	BoardDTO boardDTO = new BoardDTO();
+    	ResultSet rs = null;
+    	String userNick = null;
+    	
+    	try {
+    		conn = Dbconn.getConnection();
+    		String sql = "select p_image1_orig_name,p_title,p_price,p_description,user_nick,p_regist_date,p_transac_loc,p_m_catagory,p_s_catagory,p_status1,p_like,p_delivery,deal_m1 from sellboard where p_idx=?";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setInt(1, p_idx);
+    		rs = pstmt.executeQuery();
+    		while(rs.next()) {
+    			boardDTO.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
+    			boardDTO.setP_title(rs.getString("p_title"));
+    			boardDTO.setP_price(rs.getString("p_price"));
+    			boardDTO.setP_description(rs.getString("p_description"));
+    			boardDTO.setUserNick(rs.getString("user_nick"));
+    			userNick = rs.getString("user_nick");
+    			boardDTO.setP_regist_date(rs.getString("p_regist_date"));
+    			boardDTO.setP_transac_loc(rs.getString("p_transac_loc"));
+    			boardDTO.setP_m_category(rs.getString("p_m_catagory"));
+    			boardDTO.setP_s_category(rs.getString("p_s_catagory"));
+    			boardDTO.setP_status1(rs.getString("p_status1"));
+    			boardDTO.setP_like(rs.getInt("p_like"));
+    			boardDTO.setP_delivery(rs.getString("p_delivery"));
+    			boardDTO.setDeal_m1(rs.getString("deal_m1"));
+    		}
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return boardDTO;
+    }
+    
+    public int showUserItemCnt(String userNick) {
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	BoardDTO boardDTO = new BoardDTO();
+    	ResultSet rs = null;
+    	int cnt = 0;
+    	String sql = "SELECT COUNT(user_nick) FROM sellboard where user_nick = ?";
+    	try {
+    		conn = Dbconn.getConnection();
+    		pstmt= conn.prepareStatement(sql);
+    		pstmt.setString(1, userNick);
+    		rs = pstmt.executeQuery();
+    		if(rs.next()) {
+    			cnt = rs.getInt(1);
+    		}
+    		
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return cnt;
+    }
+    
+    public List<BoardDTO> showUserItem(String userNick) {
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	List<BoardDTO> board = new ArrayList<BoardDTO>();
+    	ResultSet rs = null;
+    	String sql = "SELECT p_idx,p_image1_orig_name,p_title,p_price FROM sellboard where user_nick = ?";
+    	try {
+    		conn = Dbconn.getConnection();
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, userNick);
+    		rs = pstmt.executeQuery();
+    		while(rs.next()) {
+    			BoardDTO boardDTO = new BoardDTO();
+    			boardDTO.setP_idx(rs.getInt("p_idx"));
+    			boardDTO.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
+    			boardDTO.setP_title(rs.getString("p_title"));
+    			boardDTO.setP_price(rs.getString("p_price"));
+    			board.add(boardDTO);
+    		}
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return board;
+    }
    
 
  

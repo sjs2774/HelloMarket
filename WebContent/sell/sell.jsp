@@ -369,14 +369,14 @@
                     <div class="item_select_box item_select_margin">
                     <select name="p_s_category">
                         <option selected="" value="" hidden="">하위 카테고리</option>
-                           <option id="case1" value="sub1">휴대폰,태블릿(1)</option>
-                           <option id="case2" value="sub2">휴대폰,태블릿(2)</option>
-                            <option id="case3" value="sub3">뷰티(1)</option>
-                            <option id="case4" value="sub4">뷰티(2)</option>
-                            <option id="case5" value="sub5">여성의류(1)</option>
-                            <option id="case6" value="sub6">여성의류(2)</option>
-                            <option id="case7" value="sub7">신발,가방,잡화(1)</option>
-                            <option id="case8" value="sub8">신발,가방,잡화(2)</option>
+                           <option id="case1" value="sub1">휴대폰</option>
+                           <option id="case2" value="sub2">태블릿</option>
+                            <option id="case3" value="sub3">헤어</option>
+                            <option id="case4" value="sub4">미용</option>
+                            <option id="case5" value="sub5">여성상의</option>
+                            <option id="case6" value="sub6">여성하의</option>
+                            <option id="case7" value="sub7">신발</option>
+                            <option id="case8" value="sub8">가방,잡화</option>
                       </select></div>
                   </dd>
                 </dl>

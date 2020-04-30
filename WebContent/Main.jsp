@@ -323,7 +323,7 @@
 	for(BoardDTO b : boardDTO){
 %>
 	<li class="main_col_4" style="height: auto;">
-		<a class="card card_list" href="">
+		<a class="card card_list" href="/HelloMarket/item/item.jsp?p_idx=<%=b.getP_idx()%>">
        		 <div class="card_box">
                  <div class="image_wrapper">
                      <div class="image_outside">

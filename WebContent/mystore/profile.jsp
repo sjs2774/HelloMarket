@@ -319,12 +319,13 @@
                                 <section class="left_main">
                                     <div class="profile_edit_wrapper">
                                         <div class="profile_edit_image">
-                                            <div class="profile_edit_image_box"><img
-                                                    src="../img/img_apply_profile_4x_0419.png"
-                                                    alt="n15979427의 프로필 이미지"><img
-                                                    src="../img/btn_profile_edit_photo_n.png"
-                                                    alt="프로필 사진 등록 이미지"><input type="file" class="pf_img" name="file"
-                                                    id="upFile" accept="image/jpeg, image/png"></div>
+                                        <form method="post" enctype="multipart/form-data" id="form">
+                                            <div class="profile_edit_image_box">
+                                            	<img src="../img/img_apply_profile_4x_0419.png" alt="n15979427의 프로필 이미지">
+                                            	<img src="../img/btn_profile_edit_photo_n.png" alt="프로필 사진 등록 이미지" id="upProfile">
+                                            	<input type="file" class="pf_img" name="file" id="upFile" accept="image/jpeg, image/png">
+                                             </div>
+                                         </form>
                                         </div>
                                         <div class="profile_edit_main">
                                             <ul>

@@ -21,6 +21,20 @@ public class BoardDTO {
    private String member_nick;
    private String member_level;
    private String member_star;
+   private int p_like;
+   public int getP_like() {
+	return p_like;
+}
+public void setP_like(int p_like) {
+	this.p_like = p_like;
+}
+public String getP_regist_date() {
+	return p_regist_date;
+}
+public void setP_regist_date(String p_regist_date) {
+	this.p_regist_date = p_regist_date;
+}
+private String p_regist_date;
 	public int getP_idx() {
 		return p_idx;
 	}

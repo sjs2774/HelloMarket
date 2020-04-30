@@ -10,9 +10,7 @@
    #fileflow02 { display:none; } 
    #fileflow03 { display:none; } 
 
-  </style>
 
-  <style id="__jsx-2573731215">
     #nprogress {
       pointer-events: none;
     }
@@ -110,12 +108,6 @@
         transform: rotate(360deg);
       }
     }
-  </style>
-  <style id="__jsx-1471488780">
-    #nprogress {
-      pointer-events: none;
-    }
-
     #nprogress .bar {
       background: #2299DD;
       position: fixed;
@@ -209,4 +201,3 @@
         transform: rotate(360deg);
       }
     }
-  </style>

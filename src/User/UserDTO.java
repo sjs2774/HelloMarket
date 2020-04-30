@@ -7,9 +7,30 @@ public class UserDTO {
 	private int userIdx;
 	private String userNick;
 	private String userProf;
+	private int sellerStar;
 	private int sellerLevel;
+	private int userFollower;
+	private int userFollowing;
+	public int getUserFollower() {
+		return userFollower;
+	}
+	public void setUserFollower(int userFollower) {
+		this.userFollower = userFollower;
+	}
+	public int getUserFollowing() {
+		return userFollowing;
+	}
+	public void setUserFollowing(int userFollowing) {
+		this.userFollowing = userFollowing;
+	}
 	public int getUserPh() {
 		return userPh;
+	}
+	public int getSellerStar() {
+		return sellerStar;
+	}
+	public void setSellerStar(int sellerStar) {
+		this.sellerStar = sellerStar;
 	}
 	public void setUserPh(int userPh) {
 		this.userPh = userPh;

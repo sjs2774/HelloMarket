@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "User.*" %>
+<%@ page import = "Board.*" %>
+<%@ page import ="java.util.List" %>
+<%@ page import = "java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +17,17 @@
 <body>
     <div id="__next">
         <%
+    UserDAO userDAO = new UserDAO();
+    UserDTO uploaderDTO = new UserDTO();
+    BoardDAO boardDAO = new BoardDAO();
+    List<BoardDTO> uploaderItems = new ArrayList<BoardDTO>();
+    BoardDTO boardDTO = new BoardDTO();
+    int uploaderLevel = 0;
+   	int uploaderIdx =0;
+   	int uploaderItemCnt = 0;
+    String uploaderLevelName = null;   
+        
+        
 	String userId = null;
 	String userNick = null;
 	String userProfile = null;
@@ -32,6 +47,15 @@
 	}else{
 		levelName="브론즈";
 	}
+	if(request.getParameter("userIdx") != null){
+		
+		uploaderIdx = Integer.parseInt(request.getParameter("userIdx"));
+		uploaderDTO = userDAO.getUserInfo(uploaderIdx);
+		uploaderItemCnt = boardDAO.showUserItemCnt(uploaderDTO.getUserNick());
+		uploaderItems = boardDAO.showUserItem(uploaderDTO.getUserNick());
+		
+	}
+	
 %>
       
         
@@ -258,6 +282,78 @@
                     <div class="main_area_center">
                         <div class="main">
                             <h2> 회원프로필 영역</h2>
+                            <%
+                            	if(uploaderIdx != 0){
+                           	%>
+                            		<div class="my_profile_left">
+                                    <div class="my_profile_info">
+                                        <div class="my_profile_image"><img
+                                                src="../img/img_apply_profile_4x_0419.png"
+                                                alt="n14474743의 프로필 이미지"><img
+                                                src="../img/img_level_5_x2.png"
+                                                alt="뱃지 이미지"></div>
+                                        <div class="my_profile_nick"><%=uploaderDTO.getUserNick() %></div>
+                                        <div class="my_profile_shop_created">
+                                            <div class="my_profile_start_mobile">태조 2년 시작</div>
+                                            <div class="my_profile_shop"><a href="/m/profile"><button
+                                                        type="button">상점주소생성</button></a></div>
+                                            <div class="my_profile_start">태조 2년 시작</div>
+                                        </div>
+                                        <div class="my_profile_follow"><a href="/m/following">
+                                                <div class="my_profile_follow_count"><span>팔로잉</span><span><%=uploaderDTO.getUserFollowing() %></span></div>
+                                            </a>
+                                            <div class="my_profile_follow_line">|</div><a href="/m/followers">
+                                                <div class="my_profile_follow_count"><span>팔로워</span><span><%=uploaderDTO.getUserFollower() %></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="my_profile_pro_review">
+                                            <div class="my_profile_pro_review_box"><a
+                                                    href="/s/@14474743?tab=item"><span>상품</span><span><%=uploaderItemCnt %></span></a></div>
+                                            <div class="my_profile_pro_review_box"><a
+                                                    href="/s/@14474743?tab=review"><span>거래후기</span><span>123871</span>
+                                                    <div class="my_profile_pro_review_rating"><img
+                                                            src="../img/img_review_star_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 1"><img
+                                                            src="../img/img_review_star_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 2"><img
+                                                            src="../img/img_review_star_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 3"><img
+                                                            src="../img/img_review_star_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 4"><img
+                                                            src="../img/img_review_star_half_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 5"></div>
+                                                </a></div>
+                                        </div><span class="my_profile_more_text" width="0"><span><span><%=uploaderDTO.getUserProf() %></span></span><span
+                                                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
+                                                    class="text_trcucate_more">... <p>전체보기</p></span></span></span>
+                                    </div>
+                                    <div class="my_profile_nav">
+                                        <ul>
+                                            <li class="my_profile_m_nav"><a class="active active" id="undefined"
+                                                    href="/s/@14474743?tab=item"><span>상품 0</span></a></li>
+                                            <li class="my_profile_m_nav"><a
+                                                    href="/s/@14474743?tab=review"><span>거래후기&nbsp;</span><span>0</span>
+                                                    <div class="my_profile_pro_review_rating"><img
+                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 1"><img
+                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 2"><img
+                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 3"><img
+                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 4"><img
+                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
+                                                            alt="프로필 별점 없는 이미지 5"></div>
+                                                </a></li>
+                                            <li><a href="level.html"><span>나의 등급</span></a></li>
+                                            <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
+                                            <li><a href="/m/specialist/list.hm"><span>전문판매자 신청</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <% 
+                            	}else{
+                            %>
                             <div class="my_profile_left">
                                 <div class="my_profile_info">
                                     <div class="my_profile_image"><img
@@ -265,7 +361,7 @@
                                             alt="n14474743의 프로필 이미지"><img
                                             src="../img/img_level_5_x2.png"
                                             alt="뱃지 이미지"></div>
-                                    <div class="my_profile_nick">판매왕</div>
+                                    <div class="my_profile_nick"><%=userNick %></div>
                                     <div class="my_profile_shop_created">
                                         <div class="my_profile_start_mobile">태조 2년 시작</div>
                                         <div class="my_profile_shop"><a href="/m/profile"><button
@@ -324,7 +420,57 @@
                                     </ul>
                                 </div>
                             </div>
+                            <% } %>
                             <h2> 회원 탭 영역 </h2>
+                            <%
+                            	if(uploaderIdx!=0){
+                            %>
+                            	<section class="left_main profile_right_main">
+                                <div class="tab_content">
+									    <div>
+									        <div class="infinite-scroll-component " style="height: auto; overflow: auto;">
+									            <ul class="mian_row profile_main_row">
+									            <%
+									            	for(BoardDTO b : uploaderItems){
+									            %>
+									                <li class="main_col_3"><a class="card card_list" href="/HelloMarket/item/item.jsp?p_idx=<%=b.getP_idx()%>">
+									                        <div class="card_box">
+									                            <div class="image_wrapper">
+									                                <div class="image_outside">
+									                                    <div class="image_centerbox">
+									                                    <img src="/HelloMarket/upload/img/<%=b.getP_image1_orig_name() %>" class="thumbnail_img" alt="<%=b.getP_title()%> "></div>
+									                                </div>
+									                            </div>
+									                            <div class="cont">
+									                                <div class="item_title"><%=b.getP_title() %> </div>
+									                                <div class="item_price"><%=b.getP_price() %></div>
+									                            </div>
+									                        </div>
+									                    </a></li>
+									                    <%} %>
+									                
+									            </ul>
+									        </div>
+									    </div>
+									    <div class="paging">
+									        <ul>
+									            <li></li>
+									            <li class="active"><a href="/s/@15979427?type=item&amp;page=1">
+									                    <div class="paging_box">1</div>
+									                </a></li>
+									            <li></li>
+									        </ul>
+									    </div>
+									</div>
+									                                    
+                                    	
+                                    
+                                    
+                                  
+                            </section>
+                            <% 
+                            	}else{
+                            %>
                             <section class="left_main profile_right_main">
                                 <div class="tab_content">
                                     <div class="my_profile_item_menu">
@@ -333,6 +479,7 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    
                                     <div class="cat_box">
                                         <div class="my_specialist_name">전체&nbsp;<span>0</span></div>
                                         <div class="profile_right_search">
@@ -354,6 +501,26 @@
                                                 <option value="">카테고리 전체</option>
                                             </select></div>
                                     </div>
+                                    
+                                    	<div class="tab_content">
+                                        <ul class="mian_row profile_main_row">
+                                            <li class="main_col_3"><a class="card card_list" href="/item/166077188?viewPath=profile">
+                                                    <div class="card_box">
+                                                        <div class="image_wrapper">
+                                                            <div class="image_outside">
+                                                                <div class="image_centerbox"><img src="https://ccimg.hellomarket.com/images/2020/item/03/18/20/4008287_4868316_1.jpeg?size=s4" class="thumbnail_img" alt="아이패드5321"><img src="https://ccimage.hellomarket.com/web/2019/item/img_tag_sale_itemlist_card_reserve_hellopay_x2.png" alt="예약중" class="thumbnail_state_img"></div>
+                                                                <div class="dealer_text_position"><img src="../img/ico_badge_thumbnail_hellopay.png" alt="헬로페이 아이콘"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <div class="item_title">아이패드5321</div>
+                                                            <div class="item_price">100원</div>
+                                                        </div>
+                                                    </div>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                    
                                     <div class="tab_content">
                                         <ul class="mian_row profile_main_row">
                                             <li class="main_col_3"><a class="card card_list" href="/item/166077188?viewPath=profile">
@@ -374,6 +541,7 @@
                                     </div>
                                 </div>
                             </section>
+                            <%} %>
                         </div>
                     </div>
                 </div>
