@@ -3,6 +3,7 @@
 <%@ page import = "User.*" %>
 <%@page import="Board.BoardDTO" %>
 <%@page import="Board.BoardDAO" %>
+<%@page import ="zzim.*" %>
 <%@ page import = "Comment.CommentDAO" %>
 <%@ page import = "Comment.CommentDTO" %>
 
@@ -47,7 +48,7 @@
 			secondCat = "가방,잡화";
 		}
 	}
-	
+
 	
 	
 %>
@@ -107,6 +108,17 @@
 	 commentList = commentDAO.getCommentList(p_idx);
 	 
 	 int userIdx = userDAO.getUserIdx(userNick);
+	 ZzimDAO zzimDAO = new ZzimDAO();
+	 List<ZzimDTO> ZzimList = new ArrayList<ZzimDTO>();
+	 
+	 ZzimList = zzimDAO.itemZzimed(p_idx);
+	 boolean thisZzim = false ; 
+	 for(ZzimDTO z : ZzimList){
+		 if(z.getUser_idx()==userIdx){
+			 thisZzim = true;
+		 }
+	 }
+	 
 	 
 	 
 %>
@@ -403,7 +415,7 @@
                                                         <span class="wish_box">
                                                             <img src="https://ccimage.hellomarket.com/web/2020/item/ico_zzim_24x23_s_x2.png"
                                                                 alt="찜하기이미지" class="wish_icon">
-                                                            <label><%=boardDTO.getP_like() %></label>
+                                                            <label id ="likeCnt"><%=boardDTO.getP_like() %></label>
                                                         </span>
                                                     </span></div><span
                                                     class="item_title"><%=boardDTO.getP_title() %></span>
@@ -436,11 +448,24 @@
                                                     <div class="item_sns item_detail_sns">
                                                         <div class="item_hello_box">
                                                             <div class="item_hello_box_talk item_copy_box_talk">
-                                                                <div class="wish_img_box" onclick="zzimItem(<%=p_idx%>,<%=userIdx%>)"><img
-                                                                        src="/HelloMarket/img/ico_zzim.png"
-                                                                        alt="찜하기이미지" class="wish_icon"></div><button
-                                                                    type="button"
-                                                                    class="hello_talk_btn item_copy_btn">헬로톡</button>
+                                                            <%
+                                                            		if(thisZzim){
+                                                            %>
+                                                            			<div class="wish_img_box" onclick="zzimedItem(<%=p_idx%>,<%=userIdx%>,<%=boardDTO.getP_like()%>)">
+                                                                        <img src="/HelloMarket/img/ico_zzimed.png" alt="찜하기이미지" class="wish_icon">
+                                                                        </div>
+                                                            <% 
+                                                            		}else{
+                                                            %>
+                                                            			<div class="wish_img_box" onclick="zzimItem(<%=p_idx%>,<%=userIdx%>,<%=boardDTO.getP_like()%>)">
+                                                                        <img src="/HelloMarket/img/ico_zzim.png" alt="찜하기이미지" class="wish_icon">
+                                                                        </div>
+                                                             <%            
+                                                            		}
+                                                            	
+                                                            %>
+                                                                
+                                                                <button type="button" class="hello_talk_btn item_copy_btn">헬로톡</button>
                                                             </div>
                                                             <div class="item_hello_box_pay item_hello_box_chat_pay">
                                                             </div>
@@ -452,8 +477,7 @@
                                            	 if(userNick != null){
                                            		 
                                            		 if(userNick.equals(uploaderNick)){
-                                           			 
-                                          
+                                        
                                            	%>
                                            		<div class="item_user_info">
 												    <div class="modify_box_left">
@@ -495,7 +519,8 @@
 												        </ul>
 												    </div>
 												</div>
-												<%} 
+												<%
+												} 
                                            	 }
 												%>
                                            

@@ -12,8 +12,7 @@
 	ZzimDAO zzimDAO = new ZzimDAO();
 	ZzimDTO zzimDTO = new ZzimDTO();
 	
-	zzimDAO.itemZzim(pIdx, userIdx,pLike);
+	zzimDAO.zzimCancel(pIdx, userIdx, pLike);
 	
 %>
-
-                                                           <%=pLike+1%>
+	<%=pLike-1 %>

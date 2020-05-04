@@ -32,14 +32,15 @@ public class BoardDAO {
 	   
 	      try {
 	    	 conn = Dbconn.getConnection();
-	    	 
+	    	 String deal = boarddto.getDeal_m1()+boarddto.getDeal_m2();
+	    	 deal = deal.replaceAll("null","");
 	    	 String sql = "insert into sellboard(user_nick, deal_m1, p_image1_path, p_image1_orig_name, p_title, p_m_catagory, p_s_catagory, p_description, p_trade_kind, p_price, p_delivery, p_exchange, p_status1, p_status2, p_transac_loc) " + 
 			            "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	 
 	         pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	         
 	         pstmt.setString(1, boarddto.getUserNick());
-	         pstmt.setString(2, boarddto.getDeal_m1()+ boarddto.getDeal_m2());
+	         pstmt.setString(2, deal);
 	         pstmt.setString(3, boarddto.getP_image1_path());
 	         pstmt.setString(4, boarddto.getP_image1_orig_name());
 	         pstmt.setString(5, boarddto.getP_title());

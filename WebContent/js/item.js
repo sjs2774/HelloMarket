@@ -26,16 +26,36 @@
 	
 	        });
 	}
-	function zzimItem(pIdx,userIdx){
+	function zzimItem(pIdx,userIdx,pLike){
+		
 		$.ajax({
 			url : "/HelloMarket/item/zzim_ok.jsp",
 			type : "POST",
 			cahce : false,
 			dataType : "text",
-			data : "pIdx ="+pIdx+"&userIdx="+userIdx,
+			data : "pIdx="+pIdx+"&userIdx="+userIdx+"&pLike="+pLike,
 			
 			success : function(data){
-				console.log('연결 성공');
+				$(".wish_icon").attr("src","/HelloMarket/img/ico_zzimed.png");
+				$("#likeCnt").html(data);
+			},
+			error : function(request,status,error){
+				var msg = "ERROR : "+ request.status + "<br>"
+				console.log(msg);
+			}
+		});
+	}
+	function zzimedItem(pIdx,userIdx,pLike){
+		$.ajax({
+			url : "/HelloMarket/item/zzimed_ok.jsp",
+			type : "POST",
+			cahce : false,
+			dataType : "text",
+			data : "pIdx="+pIdx+"&userIdx="+userIdx+"&pLike="+pLike,
+			
+			success : function(data){
+				$(".wish_icon").attr("src","/HelloMarket/img/ico_zzim.png");
+				$("#likeCnt").html(data);
 			},
 			error : function(request,status,error){
 				var msg = "ERROR : "+ request.status + "<br>"
