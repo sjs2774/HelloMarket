@@ -3,6 +3,9 @@
 <%@ page import = "User.*" %>
 <%@page import="Board.BoardDTO" %>
 <%@page import="Board.BoardDAO" %>
+<%@ page import = "Comment.CommentDAO" %>
+<%@ page import = "Comment.CommentDTO" %>
+
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%
@@ -11,6 +14,7 @@
 	BoardDAO boardDAO = new BoardDAO();
 	BoardDTO boardDTO = new BoardDTO();
 	boardDTO = boardDAO.showThisItem(p_idx);
+	
 	
 	String firstCat = null;
 	String secondCat = null;
@@ -43,6 +47,7 @@
 			secondCat = "가방,잡화";
 		}
 	}
+	
 	
 	
 %>
@@ -93,6 +98,16 @@
 	 UserDAO userDAO = new UserDAO();
 	 uploaderLevel = userDAO.getUser_level(uploaderNick);
 	 uploaderIdx = userDAO.getUserIdx(uploaderNick);
+	 
+	 CommentDAO commentDAO = new CommentDAO();
+	 int cmtCnt = 0;
+	 cmtCnt = commentDAO.getCmtCnt(p_idx);
+	 
+	 List<CommentDTO> commentList = new ArrayList<CommentDTO>();
+	 commentList = commentDAO.getCommentList(p_idx);
+	 
+	 int userIdx = userDAO.getUserIdx(userNick);
+	 
 	 
 %>
     <div id="__next" style="height: auto !important;">
@@ -421,8 +436,8 @@
                                                     <div class="item_sns item_detail_sns">
                                                         <div class="item_hello_box">
                                                             <div class="item_hello_box_talk item_copy_box_talk">
-                                                                <div class="wish_img_box"><img
-                                                                        src="https://ccimage.hellomarket.com/web/2018/item/ico_zzim.png"
+                                                                <div class="wish_img_box" onclick="zzimItem(<%=p_idx%>,<%=userIdx%>)"><img
+                                                                        src="/HelloMarket/img/ico_zzim.png"
                                                                         alt="찜하기이미지" class="wish_icon"></div><button
                                                                     type="button"
                                                                     class="hello_talk_btn item_copy_btn">헬로톡</button>
@@ -515,21 +530,7 @@
                                                     <div class="item_count"><a href="/s/@1388926?type=item"><span
                                                                 class="item_count_title">상품</span><span
                                                                 class="item_count_number"><%=userItemCnt %></span></a></div>
-                                                    <div class="detail_profile_review"><a
-                                                            href="/s/@1388926?tab=review"><span
-                                                                class="review_label">거래후기</span><span
-                                                                class="item_count_rating">(10)</span><span
-                                                                class="item_count_rating_image"><img
-                                                                    src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                    alt="상품 상세 모바일 별점 한개 이미지 1"><img
-                                                                    src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                    alt="상품 상세 모바일 별점 한개 이미지 2"><img
-                                                                    src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                    alt="상품 상세 모바일 별점 한개 이미지 3"><img
-                                                                    src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                    alt="상품 상세 모바일 별점 한개 이미지 4"><img
-                                                                    src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                    alt="상품 상세 모바일 별점 한개 이미지 5"></span></a></div>
+                                                   
                                                 </div>
                                                 <div class="description">
                                                     <div class="description_title">상세설명</div>
@@ -568,39 +569,52 @@
                                                     <div class="item_buy_box"><button type="button"
                                                             class="item_buy">헬로페이 구매</button></div>
                                                 </div>
-                                                <div class="item_user_info mobile_item_user_info">
-                                                    <div class="profile_img"><a href="/s/@1388926"><img
-                                                                src="https://ccimg.hellomarket.com/images/2018/member_profile/06/28/15/3517_277815_1.jpg?size=s4"
-                                                                alt="상품 상세 회원 프로필 이미지"></a></div>
-                                                    <div class="nick"><a href="/s/@1388926">최저가금방</a></div>
-                                                    <div class="item_count"><span class="member_level">Lv 3
-                                                            브론즈</span><span class="item_count_middot">・</span><span
-                                                            class="item_count_rating_image"><img
-                                                                src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                alt="상품 상세 별점 한개 이미지 1"><img
-                                                                src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                alt="상품 상세 별점 한개 이미지 2"><img
-                                                                src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                alt="상품 상세 별점 한개 이미지 3"><img
-                                                                src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                alt="상품 상세 별점 한개 이미지 4"><img
-                                                                src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_16x16_x2.png"
-                                                                alt="상품 상세 별점 한개 이미지 5"></span><span
-                                                            class="item_count_rating">(10)</span></div><span
-                                                        class="item_count_number mw_item_count_number">상품 169개</span>
-                                                </div>
+                                             <%
+                                             	int cnt = cmtCnt;
+                                             %>
+                                             
                                                 <div class="comment_title">
-                                                    <div class="comment_title_comment">댓글</div><span>(0)</span>
+                                                    <div class="comment_title_comment">댓글</div>
+                                                    <span id="commentCnt"><%=cmtCnt %></span>
                                                 </div>
                                                 <div class="input_custorm">
                                                     <div class="cm_in_box"><textarea type="text"
                                                             placeholder="댓글을 입력해주세요." class="input_txt"></textarea>
                                                     </div>
-                                                    <div class="cms_btn_box" onclick= "commentup('<%=userNick%>','<%=p_idx%>')">
+                                                    <div class="cms_btn_box" onclick= "commentup('<%=userNick%>','<%=p_idx%>','<%=cmtCnt%>')">
                                                         <div class="comment_send_btn">댓글등록</div>
                                                     </div>
-                                                </div>
-                                                
+                                                </div> 
+                                                		<div class="comment_list_box">
+														    <ul class="comment_list">
+                                                <%
+                                                	if(cmtCnt>0){
+                                                		for(CommentDTO c : commentList){
+                                                		
+                                                %>
+                                    
+														        <li class="comment_al_list">
+														            <div class="cmt_dtl"><a href="/s/@15979427?tab=item"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" alt="회원 이미지" class="cmt_img"></a>
+														                <div class="cmt_info">
+														                    <div class="cmt_top">
+														                        <div class="nick"><a class="link" href="/s/@15979427?tab=item"><%=c.getUserNick() %></a></div>
+														                        <div class="date"><%=c.getcDate() %></div><a class="del_btn_link"><img src="https://ccimage.hellomarket.com/mobileWeb/comment/itemdetail_img_comment_overflow.png" alt="답글삭제이미지" class="del_btn"></a>
+														                    </div>
+														                    <div class="cmt_content"><%=c.getcContent() %></div>
+														                    <div class="cmt_bottom" onclick="answer_answer()">답글</div>
+														                </div>
+														            </div>
+														            <div class="answer_area" style="display : none">
+																		 <textarea placeholder="댓글을 입력해주세요."></textarea>
+																  	 	 <img src="https://ccimage.hellomarket.com/web/button/btn_input_comment_normal.png" alt="댓글등록" class="comment_btn">
+																  	 </div>
+														        </li>
+                                                <% 
+                                                		}
+                                                	}
+                                                %>                 
+														    </ul>
+														</div>
                                             </div>
                                         </div>
                                     </div>

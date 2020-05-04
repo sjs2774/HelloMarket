@@ -36,6 +36,15 @@
 		}else{
 			levelName="브론즈";
 		}
+	 
+	 AlarmDAO alarmDAO = new AlarmDAO();
+	 AlarmDTO alarmDTO = new AlarmDTO();
+		
+		
+		int alarm_count =0; // 사용할 변수 선언하는거 (상자 이름)
+		alarm_count =alarmDAO.AlarmNum(userId); // 함수 사용하는거
+		
+		int alarm_zero = 0;	
 %>
   <div id="__next" style="height: auto !important;">
     <header class="">
@@ -67,7 +76,7 @@
         </a>
         <a id ="alarm_btn" target="_blank">
         	<img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-            <div class="alram_cnt">3</div>
+            <div class="alram_cnt"><%=alarm_count%></div>
         </a></div>
 </div>
 <% 

@@ -1,6 +1,9 @@
-
-	function commentup(userNick,pIdx){
+	var temp =1;
+	function commentup(userNick,pIdx,cmtCnt){
 			const comment = $(".input_txt").val();
+			var cnt = Number(cmtCnt)+temp;
+			
+			console.log(cnt);
 			$.ajax({
 	            url : "/HelloMarket/item/comment_ok.jsp",
 	            type : "POST",
@@ -9,11 +12,12 @@
 	            data : "comment="+comment+"&userNick="+userNick+"&pIdx="+pIdx,
 	            
 	            success : function(data){
-	            	$(".input_custorm").after()
 	            	
+	            	$(".input_custorm").after(data)
+	            	$("#commentCnt").html("<span>"+cnt+"</span>");
+	            	temp ++;
+	            	$(".input_txt").val('');
 	            	
-	            	
-	
 	            },
 	            error : function(request,status,error){
 	                var msg = "ERROR : " + request.status + "<br>"
@@ -22,6 +26,33 @@
 	
 	        });
 	}
+	function zzimItem(pIdx,userIdx){
+		$.ajax({
+			url : "/HelloMarket/item/zzim_ok.jsp",
+			type : "POST",
+			cahce : false,
+			dataType : "text",
+			data : "pIdx ="+pIdx+"&userIdx="+userIdx,
+			
+			success : function(data){
+				console.log('연결 성공');
+			},
+			error : function(request,status,error){
+				var msg = "ERROR : "+ request.status + "<br>"
+				console.log(msg);
+			}
+		});
+	}
+	
+	function answer_answer(){
+		if($(this).css("display",'none')){
+
+			$(".answer_area").css("display",'block');
+		}else if($(this).css("display",'block')){
+			$(".answer_area").css("display",'none')
+		}
+		}
+	
 	
 	
 

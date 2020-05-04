@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="User.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +10,26 @@
     <title>안녕마켓 : 알림</title>
     <link href="css/bed_chunk.css" rel="stylesheet">
 </head>
+
 <%
-	String userNick = (String) session.getAttribute("userNick");
+String userId = (String) session.getAttribute("userId");
+String userNick = (String) session.getAttribute("userNick");
 %>
+<% 
+	AlarmDAO alarmDAO = new AlarmDAO();
+	AlarmDTO alarmDTO = new AlarmDTO();
+	
+	alarmDTO = alarmDAO.Showalarm();
+	
+	alarmDAO.AlarmZero(userId);
+	
+	
+		
+%>
+
+
+
+
 
 <body>
     <div id="__next">
@@ -29,7 +47,7 @@
                             rel="noopener noreferrer"><img
                                 src="img/MarketMain.png" class="logo"
                                 alt="헬로마켓" width="115" height="28"></a></div>
-                    <div class="profile_box"><a href="https://www.hellomarket.com/s/@15979427" target="_blank"
+                    <div class="profile_box"><a href="/HelloMarket/mystore/level.jsp" target="_blank"
                             rel="noopener noreferrer">
                             <div class="info"><img
                                     src="img/img_apply_profile_4x_0419.png"
@@ -49,82 +67,16 @@
                             <div></div>
                         </button></div>
                     <div class="alarm_list_box">
-                        <li class="alarm_date">03월 20일</li>
-                    </div>
-                    <div class="alarm_list_box">
                         <li class="alarm_list isRead">
                             <div class="alarm_list_contents" style="right:0;pointer-events:auto"><a
-                                    href="https://www.hellomarket.com/m/coupon" target="_blank">
+                                    href="/HelloMarket/mystore/coupon.jsp" target="_blank">
                                     <div class="contents">
                                         <div class="profile"><img
                                                 src="img/2139_53080_1.png"
-                                                alt="헬로페이 쿠폰지급"></div>
+                                                alt="회원가입축하쿠본"></div>
                                         <div class="info_no_item_img">
-                                            <p class="title">헬로페이 쿠폰지급</p>
-                                            <p class="description">헬로페이 판매로 택배비 1,000원 할인쿠폰이 지급되었습니다.</p>
-                                        </div>
-                                    </div>
-                                </a><button>
-                                    <div class="close"></div>
-                                </button></div>
-                            <div class="close_mobile">
-                                <div>삭제</div>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="alarm_list_box">
-                        <li class="alarm_list isRead">
-                            <div class="alarm_list_contents" style="right:0;pointer-events:auto"><a
-                                    href="https://www.hellomarket.com/m/coupon" target="_blank">
-                                    <div class="contents">
-                                        <div class="profile"><img
-                                                src="img/2139_53080_1.png"
-                                                alt="헬로페이 쿠폰지급"></div>
-                                        <div class="info_no_item_img">
-                                            <p class="title">헬로페이 쿠폰지급</p>
-                                            <p class="description">헬로페이 판매로 택배비 1,000원 할인쿠폰이 지급되었습니다.</p>
-                                        </div>
-                                    </div>
-                                </a><button>
-                                    <div class="close"></div>
-                                </button></div>
-                            <div class="close_mobile">
-                                <div>삭제</div>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="alarm_list_box">
-                        <li class="alarm_list isRead">
-                            <div class="alarm_list_contents" style="right:0;pointer-events:auto"><a
-                                    href="https://www.hellomarket.com/m/coupon" target="_blank">
-                                    <div class="contents">
-                                        <div class="profile"><img
-                                                src="https://ccimg.hellomarket.com/images/2017/member_profile/s4/04/10/11/2139_53080_1.png?size=s4"
-                                                alt="헬로페이 쿠폰지급"></div>
-                                        <div class="info_no_item_img">
-                                            <p class="title">헬로페이 쿠폰지급</p>
-                                            <p class="description">헬로페이 판매로 택배비 1,000원 할인쿠폰이 지급되었습니다.</p>
-                                        </div>
-                                    </div>
-                                </a><button>
-                                    <div class="close"></div>
-                                </button></div>
-                            <div class="close_mobile">
-                                <div>삭제</div>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="alarm_list_box">
-                        <li class="alarm_list isRead">
-                            <div class="alarm_list_contents" style="right:0;pointer-events:auto"><a
-                                    href="https://www.hellomarket.com/m/coupon" target="_blank">
-                                    <div class="contents">
-                                        <div class="profile"><img
-                                                src="https://ccimg.hellomarket.com/images/2017/member_profile/s4/04/10/11/2139_53080_1.png?size=s4"
-                                                alt="헬로페이 쿠폰지급"></div>
-                                        <div class="info_no_item_img">
-                                            <p class="title">헬로페이 쿠폰지급</p>
-                                            <p class="description">헬로페이 판매로 택배비 1,000원 할인쿠폰이 지급되었습니다.</p>
+                                            <p class="title"><%=alarmDTO.getAlarmName()%></p>
+                                            <p class="description"><%=alarmDTO.getAlarmTerms()%></p>
                                         </div>
                                     </div>
                                 </a><button>
@@ -138,12 +90,13 @@
                 </div>
             </div>
         </section>
+
         <footer>
             <div>©
                 <!-- --> <a href="https://www.hellomarket.com" target="_blank"
                     rel="noopener noreferrer"><span>(주)헬로마켓</span></a>. All rights reserved.</div>
         </footer>
     </div>
+    
 </body>
-
 </html>
