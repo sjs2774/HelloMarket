@@ -359,24 +359,24 @@
                     <div class="item_select_box">
                     <select name="p_m_category">
                         <option value="" hidden="">카테고리</option>
-                            <option id="1" value="1">휴대폰,태블릿</option>
-                            <option id="2" value="2">뷰티</option>
-                            <option id="3" value="3">여성의류</option>
-                            <option id="4" value="4">신발,가방,잡화</option>
+                            <option id="1" value="HAC0000">휴대폰,태블릿</option>
+                            <option id="2" value="HAC0001">뷰티</option>
+                            <option id="3" value="HAC0002">여성의류</option>
+                            <option id="4" value="HAC0003">신발,가방,잡화</option>
                       </select>
                       </div>
                       
                     <div class="item_select_box item_select_margin">
                     <select name="p_s_category">
                         <option selected="" value="" hidden="">하위 카테고리</option>
-                           <option id="case1" value="sub1">휴대폰</option>
-                           <option id="case2" value="sub2">태블릿</option>
-                            <option id="case3" value="sub3">헤어</option>
-                            <option id="case4" value="sub4">미용</option>
-                            <option id="case5" value="sub5">여성상의</option>
-                            <option id="case6" value="sub6">여성하의</option>
-                            <option id="case7" value="sub7">신발</option>
-                            <option id="case8" value="sub8">가방,잡화</option>
+                           <option id="case1" value="HAC0010">휴대폰</option>
+                           <option id="case2" value="HAC0020">태블릿</option>
+                            <option id="case3" value="HAC0011">헤어</option>
+                            <option id="case4" value="HAC0021">미용</option>
+                            <option id="case5" value="HAC0012">여성상의</option>
+                            <option id="case6" value="HAC0022">여성하의</option>
+                            <option id="case7" value="HAC0013">신발</option>
+                            <option id="case8" value="HAC0023">가방,잡화</option>
                       </select></div>
                   </dd>
                 </dl>

@@ -70,7 +70,7 @@
     	<span class="nick_title"><%=userNick %>님</span>
     	</div>
     <div class="notification_box">
-    	<a href="" target="_blank" rel="noopener noreferrer">
+    	<a href="/HelloMarket/chat.jsp" target="_blank" rel="noopener noreferrer">
     		<img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
         	<div class="chat_cnt">4</div>
         </a>
@@ -190,16 +190,16 @@
                       <li class="cat_space"><a></a></li>
                       <li class="cat_space"><a></a></li>
                       <li class="cat_space"><a></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0000"><img
                             src="/HelloMarket/img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
                             class="category_text">휴대폰, 테블릿</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0001"><img
                             src="/HelloMarket/img/cate_had0000.png" alt="뷰티" class="category_img"><span
                             class="category_text">뷰티</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0002"><img
                             src="/HelloMarket/img/cate_haa0000.png" alt="여성의류" class="category_img"><span
                             class="category_text">여성의류</span></a></li>
-                      <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0003"><img
                             src="/HelloMarket/img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
                             class="category_text">신발,가방,잡화</span></a></li>
                       <li class="category_blank"></li>

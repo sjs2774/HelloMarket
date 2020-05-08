@@ -345,7 +345,7 @@
                                                             src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
                                                             alt="프로필 별점 없는 이미지 5"></div>
                                                 </a></li>
-                                            <li><a href="level.html"><span>나의 등급</span></a></li>
+                                            <li><a href="level.jsp"><span>나의 등급</span></a></li>
                                             <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
                                             <li><a href="/m/specialist/list.hm"><span>전문판매자 신청</span></a></li>
                                         </ul>

@@ -54,7 +54,13 @@ public class CommentDAO {
 				commentDTO.setcIdx(rs.getInt("c_idx"));
 				commentDTO.setUserNick(rs.getString("user_nick"));
 				commentDTO.setcContent(rs.getString("c_content"));
-				commentDTO.setcDate(rs.getString("c_date"));
+				int commentTime = Integer.parseInt(rs.getString("c_date").substring(11, 13));
+				String timeType = "오전";
+				if(commentTime >= 12) {
+					timeType ="오후";
+					commentTime -=12;
+				}
+				commentDTO.setcDate(rs.getString("c_date").substring(5,11)+" "+ timeType + " " + commentTime + ":" + rs.getString("c_date").substring(14,16)+ " ");
 				comment.add(commentDTO);
 			}
 		}catch(Exception e) {

@@ -72,7 +72,9 @@
 			$(".answer_area").css("display",'none')
 		}
 		}
-	
+	function gotoChat(toId){
+		location.href ="/HelloMarket/chat.jsp?toId="+toId;
+	}
 	
 	
 

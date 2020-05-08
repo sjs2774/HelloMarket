@@ -63,6 +63,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
 <body>
     <%
 	String userId = null;
@@ -462,10 +463,14 @@
                                                                         </div>
                                                              <%            
                                                             		}
-                                                            	
+                                                            	if(!uploaderNick.equals(userNick)){
+                                                             %>	
+                                                                 <button type="button" class="hello_talk_btn item_copy_btn" onclick="gotoChat('<%=uploaderNick%>')">안녕톡</button>
+                                                            
+                                                             <%	
+                                                            	}
                                                             %>
                                                                 
-                                                                <button type="button" class="hello_talk_btn item_copy_btn">헬로톡</button>
                                                             </div>
                                                             <div class="item_hello_box_pay item_hello_box_chat_pay">
                                                             </div>

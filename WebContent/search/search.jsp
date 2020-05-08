@@ -3,13 +3,26 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String category = request.getParameter("category");	
+	System.out.println(category);
+	String catName = "";
+	if(category.equals("HAK0000")){
+		catName = "휴대폰,태블릿";
+	}else if(category.equals("HAK00001")){
+		catName = "뷰티";
+	}else if(category.equals("HAK0002")){
+		catName = "여성의류";
+	}else {
+		catName = "신발,가방,잡화";
+	}
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
   <meta charSet="utf-8" />
-  <title>유아동,완구 | 헬로마켓 - 100% 안전한 중고거래 장터</title>
+  <title><%=catName %>| 안녕마켓 - 100% 안전한 중고거래 장터</title>
   <link href="/HelloMarket/css/chunk.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   
@@ -344,25 +357,25 @@
 
                       <li class="cat_space"><a></a></li>
 
-                      <li class="category"><a class="cat_link" href="/search?category=HAK0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0000"><img
 
                             src="img/cate_hak0000.png" alt="휴대폰, 테블릿" class="category_img"><span
 
                             class="category_text">휴대폰, 테블릿</span></a></li>
 
-                      <li class="category"><a class="cat_link" href="/search?category=HAD0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0001"><img
 
                             src="img/cate_had0000.png" alt="뷰티" class="category_img"><span
 
                             class="category_text">뷰티</span></a></li>
 
-                      <li class="category"><a class="cat_link" href="/search?category=HAA0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0002"><img
 
                             src="img/cate_haa0000.png" alt="여성의류" class="category_img"><span
 
                             class="category_text">여성의류</span></a></li>
 
-                      <li class="category"><a class="cat_link" href="/search?category=HAC0000"><img
+                      <li class="category"><a class="cat_link" href="/HelloMarket/search/search.jsp?category=HAK0003"><img
 
                             src="img/cate_hac0000.png" alt="신발,가방,잡화" class="category_img"><span
 
@@ -488,7 +501,7 @@
           <div class="breadcrumbs">
             <ul>
               <li><a>HOME</a></li>
-              <li>&gt; <a href="/search?category=HAE0000">유아동,완구</a></li>
+              <li>&gt; <a href="/HelloMarket/search/search.jsp?category=HAE0000"><%=catName %></a></li>
             </ul>
           </div>
           <div class="main_area">
@@ -497,7 +510,7 @@
                 <div class="left">
                   <div class="category_filter">
                     <div class="category_title">
-                      <div class="category_title_txt">유아동,완구</div>
+                      <div class="category_title_txt"><%=catName %></div>
                     </div>
                     <div class="category_sub"><span>
                         <ul class="category_sub_list">
