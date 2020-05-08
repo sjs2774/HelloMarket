@@ -3,6 +3,7 @@ package Board;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -184,6 +185,34 @@ public class BoardDAO {
     	return board;
     }
    
+    public List<BoardDTO> showItemThisCat(String catName){
+    	List<BoardDTO> list = new ArrayList<BoardDTO>();
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String sql = "SELECT p_idx,p_image1_orig_name,p_title,p_s_catagory,p_price from sellboard where p_m_catagory=? or p_s_catagory=?";
+    	try {
+    		conn = Dbconn.getConnection();
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, catName);
+    		pstmt.setString(2, catName);
+    		
+    		rs = pstmt.executeQuery();
+    		while(rs.next()) {
+    			BoardDTO boardDTO = new BoardDTO();
+    			boardDTO.setP_idx(rs.getInt("p_idx"));
+    			boardDTO.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
+    			boardDTO.setP_title(rs.getString("p_title"));
+    			boardDTO.setP_s_category(rs.getString("p_s_catagory"));
+    			boardDTO.setP_price(rs.getString("p_price"));
+    			list.add(boardDTO);
+    		}
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return list;
+    }
+    
 
  
    

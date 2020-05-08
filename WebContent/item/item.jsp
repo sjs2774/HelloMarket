@@ -19,32 +19,32 @@
 	
 	String firstCat = null;
 	String secondCat = null;
-	if(boardDTO.getP_m_category().equals("1")){
+	if(boardDTO.getP_m_category().equals("HAC0000")){
 		firstCat = "휴대폰,태블릿";
-		if(boardDTO.getP_s_category().equals("sub1")){
+		if(boardDTO.getP_s_category().equals("HAC0010")){
 			secondCat = "휴대폰";
-		}else if(boardDTO.getP_s_category().equals("sub2")){
+		}else if(boardDTO.getP_s_category().equals("HAC0020")){
 			secondCat = "태블릿";
 		}
-	}else if(boardDTO.getP_m_category().equals("2")){
+	}else if(boardDTO.getP_m_category().equals("HAC0001")){
 		firstCat = "뷰티";
-		if(boardDTO.getP_s_category().equals("sub3")){
+		if(boardDTO.getP_s_category().equals("HAC0011")){
 			secondCat = "헤어";
-		}else if(boardDTO.getP_s_category().equals("sub4")){
+		}else if(boardDTO.getP_s_category().equals("HAC0021")){
 			secondCat = "미용";
 		}
-	}else if(boardDTO.getP_m_category().equals("3")){
+	}else if(boardDTO.getP_m_category().equals("HAC0002")){
 		firstCat = "여성의류";
-		if(boardDTO.getP_s_category().equals("sub5")){
+		if(boardDTO.getP_s_category().equals("HAC0012")){
 			secondCat = "여성 상의";
-		}else if(boardDTO.getP_s_category().equals("sub6")){
+		}else if(boardDTO.getP_s_category().equals("HAC0022")){
 			secondCat = "여성 하의";
 		}
 	}else {
 		firstCat = "신발,가방,잡화";
-		if(boardDTO.getP_s_category().equals("sub7")){
+		if(boardDTO.getP_s_category().equals("HAC0013")){
 			secondCat = "신발";
-		}else if(boardDTO.getP_s_category().equals("sub8")){
+		}else if(boardDTO.getP_s_category().equals("HAC0023")){
 			secondCat = "가방,잡화";
 		}
 	}

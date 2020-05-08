@@ -304,9 +304,9 @@
                     <div class="hellopay_box_area" > <!--일단 얘는 이름 맞는거 같은데   -->
                       <ul>
                         <li class="">
-                       <input type="checkbox" id ="deal_m" name="deal_m1" value="택배거래">택배거래</li>
+                       <input type="checkbox" id ="deal_m1" name="deal_m1" value="택배거래">택배거래</li>
                         <li >
-                        <input type="checkbox"  id ="deal_m" name="deal_m2" value="직거래">직거래</li>
+                        <input type="checkbox"  id ="deal_m2" name="deal_m2" value="직거래">직거래</li>
                       </ul>
                     </div>
                     <div class="hellopay_direct_notice">
@@ -395,14 +395,14 @@
                     <ul class="item_status_list">
                       <li class="item_status">
                         
-                          <div style="font-size:13px" class="text"> <input type="radio" id="p_status" name="p_status1" value="새상품" checked>새상품</div>
+                          <div style="font-size:13px" class="text"> <input type="radio" id="p_status1" name="p_status1" value="새상품" checked>새상품</div>
                          
                         
                       </li>
                       
                       <li class="item_status">
                         
-                          <div style="font-size:12px" class="text"><input type="radio"  id="p_status" name="p_status2" value="중고">중고</div>
+                          <div style="font-size:12px" class="text"><input type="radio"  id="p_status2" name="p_status2" value="중고">중고</div>
                         
                       </li>
                     
@@ -416,12 +416,12 @@
                       <ul class="item_status_list" >
                         <li>
                           <div class="text_wrapper click text_first">
-                             <input type="radio" id="trade_kind" name="p_trade_kind" value="판매">판매
+                             <input type="radio" id="trade_kind1" name="p_trade_kind" value="판매">판매
                           </div>
                         </li>
                         <li>
                           <div class="text_wrapper text_second">
-                             <input type="radio" id="trade_kind" name="p_trade_kind" value="삽니다">삽니다
+                             <input type="radio" id="trade_kind2" name="p_trade_kind" value="삽니다">삽니다
                           </div>
                         </li>
                       </ul>
@@ -555,25 +555,25 @@ $(".item_select_box").change(function () {
    $(".item_select_margin>select>option").hide();
       var value = $('.item_select_box>select>option:selected').val();
       
-      if (value == 1) {
+      if (value == 'HAC0000') {
          $(".item_select_box item_select_margin>select>option").hide();
          
          $('#case1').show();
          $('#case2').show();
       }
-      if (value == 2) {
+      if (value == 'HAC0001') {
          $(".item_select_box item_select_margin>select>option").hide();
          
          $('#case3').show();
          $('#case4').show();
       }
-      if (value == 3) {
+      if (value == 'HAC0002') {
          $(".item_select_box item_select_margin>select>option").hide();
          
          $('#case5').show();
          $('#case6').show();
       }
-      if (value == 4) {
+      if (value == 'HAC0003') {
          $(".item_select_box item_select_margin>select>option").hide();
          
          $('#case7').show();
