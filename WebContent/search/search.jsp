@@ -75,6 +75,8 @@
 			catName ="신발";
 		}else if(category.equals("HAC0023")){
 			catName ="가방,잡화";
+		}else {
+			catName = category;
 		}
 		board = boardDAO.showItemThisCat(category);
 	}
@@ -268,7 +270,7 @@
 
                 <div>
 
-                    <div><input onkeyup="filter()" type="text" id="value" placeholder="어떤 상품을 찾고 계세요?" style="border-bottom: 1px solid rgb(158, 164, 170);">
+                    <div><input type="text" id="value"  class="com_search" placeholder="어떤 상품을 찾고 계세요?" style="border-bottom: 1px solid rgb(158, 164, 170);">
 
                         <div class="search_icon_box">
 
@@ -575,16 +577,16 @@
                       <ul><a href="/search?category=HAE0000&amp;page=1">
                           <li><label class="feature_option feature_option_checkbox">전체<div
                                 class="feature_option_checkbox_indicator checked"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;usedType=NotUsed">
+                        </a><a href="/HelloMarket/search/search.jsp?category=<%=category%>&usedType=NotUsed">
                           <li><label class="feature_option feature_option_checkbox">새상품<div
                                 class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;usedType=AsNew">
+                        </a><a href="/HelloMarket/search/search.jsp?category=<%=category%>&usedType=AsNew">
                           <li><label class="feature_option feature_option_checkbox">거의새것<div
                                 class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;usedType=Secondhand">
+                        </a><a href="/HelloMarket/search/search.jsp?category=<%=category%>&usedType=SecondHand">
                           <li><label class="feature_option feature_option_checkbox">중고<div
                                 class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;usedType=SomeFlaws">
+                        </a><a href="/HelloMarket/search/search.jsp?category=<%=category%>&usedType=SomeFlaw">
                           <li><label class="feature_option feature_option_checkbox">하자있음<div
                                 class="feature_option_checkbox_indicator"></div></label></li>
                         </a></ul>
@@ -788,7 +790,7 @@
       </div>
     </div>
   </div>
-<script src = "/HelloMarket/js/common.js"></script>
+<script src = "/HelloMarket/js/common.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 
 </html>

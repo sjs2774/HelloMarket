@@ -190,13 +190,13 @@ public class BoardDAO {
     	Connection conn = null;
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
-    	String sql = "SELECT p_idx,p_image1_orig_name,p_title,p_s_catagory,p_price from sellboard where p_m_catagory=? or p_s_catagory=?";
+    	String sql = "SELECT p_idx,p_image1_orig_name,p_title,p_s_catagory,p_price from sellboard where p_m_catagory=? or p_s_catagory=? or p_title LIKE ?";
     	try {
     		conn = Dbconn.getConnection();
     		pstmt = conn.prepareStatement(sql);
     		pstmt.setString(1, catName);
     		pstmt.setString(2, catName);
-    		
+    		pstmt.setString(3, "%"+catName+"%"); 		
     		rs = pstmt.executeQuery();
     		while(rs.next()) {
     			BoardDTO boardDTO = new BoardDTO();

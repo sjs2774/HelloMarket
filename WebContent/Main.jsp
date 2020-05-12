@@ -112,8 +112,9 @@
           <div class="header_search" id="tebas">
             <div class="com_search_box">
                 <div>
-                    <div><input type="text" class="com_search" placeholder="어떤 상품을 찾고 계세요?" value=""
+                    <div><input type="text" class="com_search" placeholder="어떤 상품을 찾고 계세요?"  value=""
                             style="border-bottom: 1px solid rgb(158, 164, 170);">
+                           
                         <div class="search_icon_box">
                             <div class="search_icon">
                                 <div class="search_circle" style="border-color: rgb(158, 164, 170);"></div>

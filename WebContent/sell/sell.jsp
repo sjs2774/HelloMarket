@@ -772,6 +772,8 @@ $(".item_select_box").change(function () {
 
 </script>
 
+<script src = "/HelloMarket/js/common.js?v=<%=System.currentTimeMillis() %>"></script>
+
 </body>
 
 </html>

@@ -173,8 +173,16 @@
                     </div>
                     <div class="chat_footer">
                         <div class="chat_footer_area">
-                            <div class="chat_input" contenteditable="true" placeholder="메세지를 입력해주세요."></div><button type="button" onclick="sendMsg('<%=fromNick%>','<%=toNick%>')">전송</button>
+                            <div class="chat_input" contenteditable="true" placeholder="메세지를 입력해주세요." onkeydown="enterfunction()"></div><button type="button" onclick="sendMsg('<%=fromNick%>','<%=toNick%>')">전송</button>
                         </div>
+                        <script>
+                        	function enterfunction(){
+                        		let keyCode = window.event.keyCode;
+                        		if(keyCode == 13){
+                        			sendMsg('<%=fromNick%>','<%=toNick%>');
+                        		}
+                        	}
+                        </script>
                     </div>
                 </div>
             </div>
