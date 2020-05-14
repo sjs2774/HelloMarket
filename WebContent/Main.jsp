@@ -279,17 +279,17 @@
                 <div class="swiper-wrapper" id="banner" style="transform: translate3d(0px,0px,0px); transition-duration: 0ms;">
                   <div class="swiper-slide swiper-slide-active" style="width: 980px;">
                     <a href="" target="_blank">
-                      <img src="img/slide_01.jpg" class="main_img">
+                      <img src="img/mainSlide01.png" class="main_img">
                     </a>
                   </div>
                   <div class="swiper-slide swiper-slide-next" style="width: 980px;">
                     <a href="" target="_blank">
-                      <img src="img/slide_02.jpg" class="main_img">
+                      <img src="img/mainSlide02.png" class="main_img">
                     </a>
                   </div>
                   <div class="swiper-slide swiper-slide-next-next" style="width: 980px;">
                     <a href="" target="_blank">
-                      <img src="img/slide_03.jpg" class="main_img">
+                      <img src="img/mainSlide03.png" class="main_img">
                     </a>
                   </div>
                 </div>

@@ -593,31 +593,7 @@
                     </div>
                     <div class="item_left_bottom"></div>
                   </div>
-                  <div class="search_filter no_padding">
-                    <div class="title">거래종류</div>
-                    <div class="middle">
-                      <ul><a href="/search?category=HAE0000&amp;page=1">
-                          <li><label class="feature_option feature_option_checkbox">전체<div
-                                class="feature_option_checkbox_indicator checked"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;sellMethod=Sell">
-                          <li><label class="feature_option feature_option_checkbox">판매<div
-                                class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;sellMethod=Freecycle">
-                          <li><label class="feature_option feature_option_checkbox">무료나눔<div
-                                class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;sellMethod=Extra">
-                          <li><label class="feature_option feature_option_checkbox">덤<div
-                                class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;sellMethod=Buy">
-                          <li><label class="feature_option feature_option_checkbox">삽니다<div
-                                class="feature_option_checkbox_indicator"></div></label></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;sellMethod=Contact">
-                          <li><label class="feature_option feature_option_checkbox">연락요망<div
-                                class="feature_option_checkbox_indicator"></div></label></li>
-                        </a></ul>
-                    </div>
-                    <div class="item_left_bottom"></div>
-                  </div>
+                  
                   <div class="search_filter no_padding">
                     <div class="middle safe_middle">
                       <ul><a href="/search?category=HAE0000&amp;page=1&amp;canBarter=true">
@@ -652,14 +628,7 @@
                         </ul>
                       </div>
                     </div>
-                    <div class="tab_type biz_type pc_type">
-                      <ul class="search_tab_type"><a
-                          href="/search?category=HAE0000&amp;page=1&amp;tabType=list">
-                          <li class="list"></li>
-                        </a><a href="/search?category=HAE0000&amp;page=1&amp;tabType=thumbnail">
-                          <li class="thumbnail active"></li>
-                        </a></ul>
-                    </div>
+                   
                     <div class="sort_filter biz_sort"><label for="sortTitle">최신순</label><select>
                         <option value="">최신순</option>
                         <option value="lowprice">저가순</option>
