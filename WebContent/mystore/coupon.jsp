@@ -107,6 +107,7 @@
 	 			$("#c_couponterms").val(data.c_couponterms);
 	 			$(".modal_close").css('display','none');
 	 			$(".ReactModalPortal").css('display','none');
+	 			location.reload();
 	 		},
 	 		
 	 		error : function(request,status,error){
@@ -153,9 +154,9 @@
 		<div class="btn_box">
     <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
     <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-            <div class="chat_cnt">4</div>
+            <div class="chat_cnt">0</div>
         </a><a href="https://account.hellomarket.com/alarms" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-            <div class="alram_cnt">3</div>
+            <div class="alram_cnt">0</div>
         </a></div>
 </div>
 <% 
@@ -312,10 +313,8 @@
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
-              <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
               <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="../img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+           
             </ul>
           </div>
         </div>
@@ -347,8 +346,7 @@
                                 <section class="left_main">
                                     <div class="coupon_header">
                                         <div class="use_coupon active left_coupon"><a>보유쿠폰</a></div>
-                                        <div class="expiration_coupon left_coupon"><a>사용완료/기간만료</a>
-                                        </div>
+                                     
                                         <div class="notice_coupon right_coupon">쿠폰 유의사항</div>
                                         <div class="download_coupon right_coupon">다운 가능한 쿠폰</div>
                                     </div>

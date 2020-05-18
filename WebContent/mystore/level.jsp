@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="User.*" %>
+<%@ page import ="follow.*" %>
+<%@ page import ="Board.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +35,21 @@
 	}else{
 		levelName="브론즈";
 	}
+	
+	UserDAO userDAO = new UserDAO();
+	int userIdx = 0;
+	userIdx = userDAO.getUserIdx(userNick);
+	
+	
+	BoardDAO boardDAO = new BoardDAO();
+	int itemCnt = boardDAO.showUserItemCnt(userNick);
+	
+	
+	int followerCnt = 0;
+	int followingCnt = 0;
+	FollowDAO followDAO = new FollowDAO();
+	followerCnt = followDAO.userFollower(userNick);
+	followingCnt = followDAO.userFollowing(userNick);
 %>
       
         
@@ -60,18 +78,18 @@
     <div class="notification_box">
     	<a href="" target="_blank" rel="noopener noreferrer">
     		<img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-        	<div class="chat_cnt">4</div>
+        	<div class="chat_cnt">0</div>
         </a>
         <a id ="alarm_btn" target="_blank">
         	<img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-            <div class="alram_cnt">3</div>
+            <div class="alram_cnt">0</div>
         </a></div>
 </div>
 <% 
 	}
 %>
           <div style="display: none;">
-            <div class="gnb_my_lyr test_type"><a href="mystore/level.jsp">
+            <div class="gnb_my_lyr test_type">
                 <div class="gnb_my_member_level">
 <%
 		  if(sellerLevel==1){
@@ -92,7 +110,7 @@
                 </div>
               </a>
               <ul class="gnb_my_list">
-              	<a href="/HelloMarket/mystore/index.jsp?<%=userNick%>">
+              	<a href="/HelloMarket/mystore/index.jsp?userIdx=<%=userIdx%>">
                   <li class="gnb_my_list_first">내상점</li>
                 </a>
                 <a href="/HelloMarket/mystore/coupon.jsp">
@@ -213,7 +231,7 @@
                       <li class="category_blank"></li>
                     </ul>
                     <ul class="mobile mobile_sub_category">
-                      <li><a href="/community/list.hm?category=DAC0002">이벤트</a><i class="arrow right_arrow"></i></li>
+                    
                       <li><a href="/community/list.hm?category=DAC0004">헬마뉴스</a><i class="arrow right_arrow"></i></li>
                       <li><a href="/help/faq.hm">헬프센터</a><i class="arrow right_arrow"></i></li>
                       <li><a href="./ad/index.html" target="_blank" rel="noopener noreferrer">광고센터</a><i
@@ -235,10 +253,9 @@
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
-              <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
+             
               <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="../img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+             
             </ul>
           </div>
         </div>
@@ -264,70 +281,60 @@
                                         <div class="my_profile_info">
                                             <div class="my_profile_image"><img
                                                     src="../img/img_apply_profile_4x_0419.png"
-                                                    alt="n14474743의 프로필 이미지"><img src="../img/img_level_5_x2.png"
+                                                    alt="n14474743의 프로필 이미지"><img src="../img/img_level1_30.png"
                                                     alt="뱃지 이미지"></div>
                                             <div class="my_profile_nick"><%=userNick %></div>
                                             <div class="my_profile_shop_created">
-                                                <div class="my_profile_start_mobile">태조 2년 시작</div>
-                                                <div class="my_profile_shop"><a href="/m/profile"><button
-                                                            type="button">상점주소생성(빼는게 좋음)</button></a></div>
-                                                <div class="my_profile_start">태조 2년 시작</div>
+                                              
                                             </div>
                                             <div class="my_profile_follow"><a href="/m/following">
                                                     <div class="my_profile_follow_count">
-                                                        <span>팔로잉</span><span>7777</span>
+                                                        <span>팔로잉</span><span><%=followingCnt %></span>
                                                     </div>
                                                 </a>
                                                 <div class="my_profile_follow_line">|</div><a href="/m/followers">
                                                     <div class="my_profile_follow_count">
-                                                        <span>팔로워</span><span>60억명</span>
+                                                        <span>팔로워</span><span><%=followerCnt %></span>
                                                     </div>
                                                 </a>
                                             </div>
                                             <div class="my_profile_pro_review">
                                                 <div class="my_profile_pro_review_box"><a
-                                                        href="/s/@14474743?tab=item"><span>상품</span><span>2351214</span></a>
+                                                        href="/s/@14474743?tab=item"><span>상품</span><span><%=itemCnt %></span></a>
                                                 </div>
                                                 <div class="my_profile_pro_review_box"><a
-                                                        href="/s/@14474743?tab=review"><span>거래후기</span><span>56439522341</span>
-                                                        <div class="my_profile_pro_review_rating"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 1"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 2"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 3"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 4"><img
-                                                                src="../img/img_review_star_half_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 5"></div>
+                                                        href="/s/@14474743?tab=review"><span>거래후기</span><span>0</span>
+                                                        
                                                     </a></div>
-                                            </div><span class="my_profile_more_text" width="0"><span><span><%=userProfile %></span></span><span
-                                                    style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
-                                                        class="text_trcucate_more">... <p>전체보기</p></span></span></span>
-                                        </div>
+                                             <%
+                                                	if(userProfile==null){
+                                                %>
+                                                	   </div><span class="my_profile_more_text" width="0"><span><span>등록된 상점소개가 없습니다.</span></span><span
+                                                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
+                                                    class="text_trcucate_more">... <p>전체보기</p></span></span></span>
+                                 					   </div>
+                                                <% 		
+                                                	}else{
+                                                %>
+                                                	</div><span class="my_profile_more_text" width="0"><span><span><%=userProfile %></span></span><span
+                                                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
+                                                    class="text_trcucate_more">... <p>전체보기</p></span></span></span>
+                                				    </div>
+                                                <% 		
+                                                	}
+                                                %>
                                         <div class="my_profile_nav">
                                             <ul>
                                                 <li class="my_profile_m_nav"><a href="/s/@14474743?tab=item"><span>상품
                                                             0</span></a></li>
                                                 <li class="my_profile_m_nav"><a
-                                                        href="/s/@14474743?tab=review"><span>거래후기&nbsp;</span><span>127838</span>
-                                                        <div class="my_profile_pro_review_rating"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 1"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 2"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 3"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 4"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 5"></div>
+                                                        href="/s/@14474743?tab=review"><span>거래후기&nbsp;</span><span>0</span>
+                                                     
                                                     </a></li>
-                                                <li><a class="active" id="scrollMain" href="level.html"><span>나의
+                                                <li><a class="active" id="scrollMain" href="level.jsp"><span>나의
                                                             등급</span></a></li>
                                                 <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
-                                                <li><a href=""><span>전문판매자 신청</span></a></li>
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -360,48 +367,17 @@
                                             <div class="level_description_table">
                                                 <table class="level_table_next">
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="level_table_next_title">페이지 관리권</td>
-                                                            <td>무료 광고 12312335개 지급</td>
-                                                        </tr>
+                                                       
                                                         <tr>
                                                             <td class="level_table_next_title">뱃지획득</td>
-                                                            <td>최고 등급 노출</td>
+                                                            <td>실버 등급 노출</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="level_view"><button type="button" id="grade_advantage">등급별 혜택
                                                     보기</button></div>
-                                            <div class="level_title">최근 90일 거래실적</div>
-                                            <div class="level_history">
-                                                <table class="level_table">
-                                                    <thead>
-                                                        <tr class="table_main">
-                                                            <td class="table_month"></td>
-                                                            <td class="table_cell">판매 수</td>
-                                                            <td class="table_price">구매 수</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>01월</td>
-                                                            <td>124124124</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>02월</td>
-                                                            <td>124125532</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>03월</td>
-                                                            <td>45734653</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
                                             <div class="level_title">유의사항</div>
                                             <div class="level_notice">
                                                 <ul>
@@ -497,27 +473,25 @@
                                     <ul class="menu_level">
                                         <li>
                                             <div class="badge_wrapper"><img
-                                                    src="../img/img_level_3_420x420.png"
+                                                    src="../img/img_level1_30.png"
                                                     class="icon_level" alt="화이트 이미지">
                                                 <div class="badge_title">
-                                                    <p>브론즈</p><span>기본등급</span>
+                                                    <p>화이트</p><span>기본등급</span>
                                                 </div>
                                             </div>
                                             <div class="level_wrapper">
                                                 <div class="title">판매자</div>
                                                 <ul class="level_table type2">
-                                                    <li><label>유료 상단업</label>
-                                                        <p>50개 무료지급 (전문판매자만 해당)</p>
-                                                    </li>
+                                                   
                                                     <li><label>뱃지획득</label>
-                                                        <p>Lv.1 브론즈뱃지 노출</p>
+                                                        <p>Lv.1 실버뱃지 노출</p>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="badge_wrapper"><img
-                                                    src="https://ccimage.hellomarket.com/api/member/img_level_2_420x420.png"
+                                                    src="../img/img_level2_30.png"
                                                     class="icon_level" alt="블루 이미지">
                                                 <div class="badge_title">
                                                     <p>실버</p><span>최근 90일간 헬로페이 1건 이상</span>
@@ -526,9 +500,7 @@
                                             <div class="level_wrapper">
                                                 <div class="title">판매자</div>
                                                 <ul class="level_table type3">
-                                                    <li><label>유료 상단업</label>
-                                                        <p>200개 무료지급 (전문판매자만 해당)</p>
-                                                    </li>
+                                                  
                                                     <li><label>뱃지획득</label>
                                                         <p>Lv.2 실버뱃지 노출</p>
                                                     </li>
@@ -546,11 +518,9 @@
                                             <div class="level_wrapper">
                                                 <div class="title">판매자</div>
                                                 <ul class="level_table type3">
-                                                    <li><label>유료 상단업</label>
-                                                        <p>250개 무료지급 (전문판매자만 해당)</p>
-                                                    </li>
+                                                   
                                                     <li><label>뱃지획득</label>
-                                                        <p>Lv.3 골드뱃지 노출</p>
+                                                        <p>Lv.3 브론즈뱃지 노출</p>
                                                     </li>
                                                     <li><label>쿠폰</label>
                                                         <p>헬로페이 상품 3천원 할인 쿠폰(1장)</p>

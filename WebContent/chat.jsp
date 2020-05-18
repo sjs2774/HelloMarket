@@ -188,7 +188,7 @@
             </div>
         </section>
         <footer>
-            <div>© <a href="https://www.hellomarket.com" target="_blank" rel="noopener noreferrer"><span>(주)헬로마켓</span></a>. All rights reserved.</div>
+            <div>© <a href="https://www.hellomarket.com" target="_blank" rel="noopener noreferrer"><span>(3조)안녕마켓</span></a>. All rights reserved.</div>
         </footer>
     </div>
 </body>

@@ -150,11 +150,11 @@
                         <div class="notification_box">
                             <a href="" target="_blank" rel="noopener noreferrer">
                                 <img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-                                <div class="chat_cnt">4</div>
+                                <div class="chat_cnt">0</div>
                             </a>
                             <a id="alarm_btn" target="_blank">
                                 <img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-                                <div class="alram_cnt">3</div>
+                                <div class="alram_cnt">0</div>
                             </a></div>
                     </div>
                     <% 
@@ -307,9 +307,7 @@
                                             <li><a href="/community/list.hm?category=DAC0004">헬마뉴스</a><i
                                                     class="arrow right_arrow"></i></li>
                                             <li><a href="/help/faq.hm">헬프센터</a><i class="arrow right_arrow"></i></li>
-                                            <li><a href="./ad/index.html" target="_blank"
-                                                    rel="noopener noreferrer">광고센터</a><i class="arrow right_arrow"></i>
-                                            </li>
+                                       
                                         </ul>
                                         <ul class="logout_wrapper">
                                             <li>
@@ -345,8 +343,7 @@
                         <ul>
                             <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
                             <li><a href="/help/faq.html">헬프센터</a></li>
-                            <li><a href="/HelloMarket/ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                                        src="/HelloMarket/img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+                          
                         </ul>
                     </div>
                 </div>
@@ -422,7 +419,7 @@
                                                     class="item_title"><%=boardDTO.getP_title() %></span>
                                                 <div class="item_price_box item_price_box_bottom">
                                                     <div class="item_price_box_bottom_low">
-                                                        <div class="item_price item_price_bottom"><%=boardDTO.getP_price() %></div>
+                                                        <div class="item_price item_price_bottom"><%=boardDTO.getP_price() %>원</div>
                                                     </div>
                                                     <div class="only_description_hellopay common_description_deal">
                                                         <table>
@@ -484,46 +481,7 @@
                                            		 if(userNick.equals(uploaderNick)){
                                         
                                            	%>
-                                           		<div class="item_user_info">
-												    <div class="modify_box_left">
-												        <div class="modify_box_left_margin">
-												            <div class="modify_box_left_admin">상품 판매 관리</div>
-												            <div class="modify_box_left_status">상태변경</div>
-												            <ul>
-												                <li><input type="radio" class="radio1" name="sellState" readonly="" value="ForSale" checked=""><label class="label2" for="sellState01">판매중</label></li>
-												                <li><input type="radio" class="radio1" name="sellState" readonly="" value="SoldOut"><label class="label2" for="sellState01">판매완료</label></li>
-												                <li><input type="radio" class="radio1" name="sellState" readonly="" value="Hidden"><label class="label2" for="sellState01">숨기기</label></li>
-												            </ul>
-												        </div>
-												    </div>
-												    <div class="modify_box_right">
-												        <ul class="modify_box_ul"><a href="/shipping/cvs/reservation/form.hm?itemIdx=166099896">
-												                <li class="modify_box_right_parcel">
-												                    <div class="modify_box_right_border"><img src="https://ccimage.hellomarket.com/web/2019/item/ico_myproduct_delivery.png" alt="배송예약 이미지" class="modify_box_right_img modify_box_right_img_delivery">
-												                        <div class="modify_box_right_text">배송예약</div>
-												                    </div>
-												                </li>
-												            </a>
-												           
-												            <li class="modify_box_right_parcel">
-												                <div class="modify_box_right_border"><img src="https://ccimage.hellomarket.com/web/2019/item/ico_myproduct_status_edit.png" alt="상태변경" class="modify_box_right_img">
-												                    <div class="modify_box_right_text">상태변경</div>
-												                </div>
-												            </li>
-												         
-												            <li><a href="/item/form.hm?idx=166099896">
-												                    <div class="modify_box_right_border"><img src="https://ccimage.hellomarket.com/web/2019/item/ico_myproduct_edit.png" alt="수정 이미지" class="modify_box_right_img">
-												                        <div class="modify_box_right_text">수정</div>
-												                    </div>
-												                </a></li>
-												            <li class="modify_mobile_delete_right">
-												                <div class="modify_box_right_border"><img src="https://ccimage.hellomarket.com/web/2018/item/ico_myitem_edit_item_x4.png" alt="상품 수정" class="modify_box_right_img">
-												                    <div class="modify_box_right_text">삭제</div>
-												                </div>
-												            </li>
-												        </ul>
-												    </div>
-												</div>
+                                           		
 												<%
 												} 
                                            	 }
@@ -676,26 +634,37 @@
                                             <div class="infinite-scroll-component "
                                                 style="height: auto; overflow: hidden auto;">
                                                 <ul>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166591808?viewPath=similar&amp;clickPath=relation">
+                                               	<%
+                                               		List<BoardDTO> rec_item = new ArrayList<BoardDTO>();
+                                               		rec_item = boardDAO.showAllItem();
+                                               		for(BoardDTO b : rec_item){
+                                               			if(boardDTO.getP_title().equals(b.getP_title())){
+                                       			%>
+                                       					
+                                       			<% 
+                                               			}else{
+                                               				
+                                               	%>		
+                                               			<li class="main_col_4"><a class="card card_list relation_card_list"
+                                                            href="/HelloMarket/item/item.jsp?p_idx=<%=b.getP_idx()%>">
                                                             <div class="card_box">
                                                                 <div class="image_wrapper">
                                                                     <div class="image_outside">
                                                                         <div class="image_centerbox"><img
-                                                                                src="/HelloMarket/upload/img/<%=boardDTO.getP_image1_orig_name() %>"
+                                                                                src="/HelloMarket/upload/img/<%=b.getP_image1_orig_name()%>"
                                                                                 alt="14k반지의 사진" class="thumbnail_img">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="cont">
                                                                     <div class="item_title relation_item_title">
-                                                                        <%=boardDTO.getP_title() %></div>
+                                                                        <%=b.getP_title()%></div>
                                                                     <div class="item_price relation_item_price">
-                                                                        <%=boardDTO.getP_price() %>원</div>
+                                                                        <%=b.getP_price() %>원</div>
                                                                 </div>
                                                                 <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
+                                                                    <div><%=b.getDeal_m1()%></div>
+                                                                    <div><%=b.getP_status1() %></div>
                                                                 </div>
                                                             </div>
                                                         </a>
@@ -706,668 +675,19 @@
                                                                     focusable="false" aria-label="찜하기" role="img"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
+                                                                    
                                                                 </svg></button></div>
                                                     </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/160729889?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2018/item/12/16/18/5157_2738734_1.jpg?size=s4"
-                                                                                alt="레이싱휠 거치대의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">레이싱휠 거치대
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">50,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166583977?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/26/15/4624477_4131060_1.jpg?size=s4"
-                                                                                alt="14k반지의 사진" class="thumbnail_img">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">
-                                                                        <%=boardDTO.getP_title() %></div>
-                                                                    <div class="item_price relation_item_price">
-                                                                        <%=boardDTO.getP_price() %></div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/161256958?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/02/06/12/5245_3660789_1.jpg?size=s4"
-                                                                                alt="아리아퍼니처 엔틱 빈티지 4인식탁세트의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">아리아퍼니처
-                                                                        엔틱 빈티지 4인식탁세트</div>
-                                                                    <div class="item_price relation_item_price">400,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166566056?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/24/22/0159116_3056614_1.jpg?size=s4"
-                                                                                alt="14k 반지의 사진" class="thumbnail_img">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">120,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/162219497?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/04/23/21/3138_4071694_1.jpg?size=s4"
-                                                                                alt="14k 하트반지의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 하트반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">143,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166620703?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/29/13/3311234_3342475_1.jpg?size=s4"
-                                                                                alt="14k 반지의 사진" class="thumbnail_img">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">210,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/162380126?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/05/11/20/5823_3361655_2.jpg?size=s4"
-                                                                                alt="14K로렉스팔찌+반지12호의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">
-                                                                        14K로렉스팔찌+반지12호</div>
-                                                                    <div class="item_price relation_item_price">950,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166582315?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/26/12/5545182_4867421_1.jpg?size=s4"
-                                                                                alt="14k반지의 사진" class="thumbnail_img">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">290,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166535472?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/22/18/2617133_1107191_2.jpg?size=s4"
-                                                                                alt="필그림 14k 반지의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">필그림 14k
-                                                                        반지</div>
-                                                                    <div class="item_price relation_item_price">80,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/162733399?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/06/07/14/3608_277815_1.png?size=s4"
-                                                                                alt="14k 나사목걸이의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k
-                                                                        나사목걸이</div>
-                                                                    <div class="item_price relation_item_price">140,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166579166?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/26/00/5006189_4099160_1.jpg?size=s4"
-                                                                                alt="14k 블루큐 반지의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 블루큐
-                                                                        반지</div>
-                                                                    <div class="item_price relation_item_price">202,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/162880835?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/06/19/17/2855_887945_1.jpg?size=s4"
-                                                                                alt="특특가[95~110] (정품) 디스커버리 남성 에어닷 공유 블루종의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">
-                                                                        특특가[95~110] (정품) 디스커버리 남성 에어닷 공유 블루종</div>
-                                                                    <div class="item_price relation_item_price">59,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166562496?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/24/17/4244024_4667984_1.jpg?size=s4"
-                                                                                alt="14k 반지 귀걸이의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 반지
-                                                                        귀걸이</div>
-                                                                    <div class="item_price relation_item_price">270,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/162887713?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/06/20/09/0152_563727_1.jpg?size=s4"
-                                                                                alt="14k 샤엘 민써클 팔찌의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 샤엘
-                                                                        민써클 팔찌</div>
-                                                                    <div class="item_price relation_item_price">235,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166565792?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/06/13/19/3033_4202918_1.jpg?size=s4"
-                                                                                alt="✔14k컷팅반지의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">✔14k컷팅반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">24,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/163029254?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/07/02/11/0122_277815_1.png?size=s4"
-                                                                                alt="14k 18k 커플링의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 18k
-                                                                        커플링</div>
-                                                                    <div class="item_price relation_item_price">250,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166584470?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/26/16/3020704_4884394_1.jpg?size=s4"
-                                                                                alt="14k 티파니반지의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k
-                                                                        티파니반지</div>
-                                                                    <div class="item_price relation_item_price">150,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/163147793?viewPath=together&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2019/item/07/12/11/3816_277815_5.png?size=s4"
-                                                                                alt="14k 18k 컷팅 사각 두줄팔찌의 사진"
-                                                                                class="thumbnail_img"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k 18k
-                                                                        컷팅 사각 두줄팔찌</div>
-                                                                    <div class="item_price relation_item_price">290,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                    <div>전문</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
-                                                    <li class="main_col_4"><a class="card card_list relation_card_list"
-                                                            href="/item/166552489?viewPath=similar&amp;clickPath=relation">
-                                                            <div class="card_box">
-                                                                <div class="image_wrapper">
-                                                                    <div class="image_outside">
-                                                                        <div class="image_centerbox"><img
-                                                                                src="https://ccimg.hellomarket.com/images/2020/item/04/23/21/5744168_4631756_1.jpg?size=s4"
-                                                                                alt="14k진주반지의 사진" class="thumbnail_img">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont">
-                                                                    <div class="item_title relation_item_title">14k진주반지
-                                                                    </div>
-                                                                    <div class="item_price relation_item_price">290,000원
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item_type">
-                                                                    <div>헬로페이</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="relation_image_wish_box image_wish_box"><button
-                                                                type="button" class="image_wish_box_btn"><svg
-                                                                    viewBox="0 0 24 24" fill="#484848"
-                                                                    fill-opacity="0.5" stroke="#ffffff" stroke-width="2"
-                                                                    focusable="false" aria-label="찜하기" role="img"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="image_wish_box_img">
-                                                                    <path
-                                                                        d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg></button></div>
-                                                    </li>
+                                               	
+                                               	
+                                               		
+                                               	<% 
+                                               		} }
+                                               	%>
+                                                    
+                                                  
+                                                   
+                                                 
                                                 </ul>
                                             </div>
                                         </div>

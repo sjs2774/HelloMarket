@@ -8,6 +8,6 @@
 	
 	FollowDAO followDAO = new FollowDAO();
 	
-	followDAO.following(myNick, yourNick);
+	followDAO.cancelFollow(myNick, yourNick);
 	
 %>

@@ -20,6 +20,9 @@
 <!--바디 부분이다!!!!-->
 <body>
 <%
+
+	BoardDAO boardDAO =new BoardDAO();	
+
 	String userId = null;
 	String userNick = null;
 	int sellerLevel = 0;
@@ -45,6 +48,11 @@
 		alarm_count =alarmDAO.AlarmNum(userId); // 함수 사용하는거
 		
 		int alarm_zero = 0;	
+		
+		UserDAO userDAO = new UserDAO();
+		int userIdx = userDAO.getUserIdx(userNick);
+		
+		
 %>
   <div id="__next" style="height: auto !important;">
     <header class="">
@@ -72,7 +80,7 @@
     <div class="notification_box">
     	<a href="/HelloMarket/chat.jsp" target="_blank" rel="noopener noreferrer">
     		<img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-        	<div class="chat_cnt">4</div>
+        	<div class="chat_cnt">0</div>
         </a>
         <a id ="alarm_btn" target="_blank">
         	<img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
@@ -103,7 +111,7 @@
                   <div><span class="level_description">나의등급</span><span class="level_description_name"><%=levelName %></span></div>
                 </div>
               <ul class="gnb_my_list">
-                  <li class="gnb_my_list_first">내상점</li>
+                  <li class="gnb_my_list_first" onclick= "goIndex(<%=userIdx%>)">내상점</li>
                   <li class="gnb_my_list_second">할인쿠폰</li>
                   <li class="gnb_my_list_last">로그아웃</li>
               </ul>
@@ -250,10 +258,8 @@
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
-              <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
               <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="/HelloMarket/ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="/HelloMarket/img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+              
             </ul>
           </div>
         </div>
@@ -316,7 +322,7 @@
 
 <%
 	List<BoardDTO> boardDTO = new ArrayList<BoardDTO>();
-	BoardDAO boardDAO =new BoardDAO();
+
 	boardDTO = boardDAO.showAllItem();
 %>
 
@@ -366,15 +372,7 @@
               <div class="scroll_top_btn"><a href="#very_top"><img src="img/btn_top_n_x2.png" alt="페이지 업 버튼"></a></div>
             </div>
 
-            <div class="ad_banner_absolute" style="top: -207px;">
-              <div class="ad_banner"><a href="ad/direct/content.html" target="_blank" rel="noopener noreferrer"><img
-                    src="img/img_banner_main_ad_0903_x2.png" alt="회원직접광고 배너 이미지"></a></div>
-            </div>
-            <div class="police_banner_absolute" style="top: 30px;">
-              <div class="police_banner">
-                <div><img src="img/img_main_banner_crime_prevention_day_1_x2.jpg" alt="경찰청&nbsp;배너&nbsp;이미지"></div>
-              </div>
-            </div>
+            
 
             <!-- 여기다 푸터 넣으면 잘 된다 하더라!-->
             <div class="footer">

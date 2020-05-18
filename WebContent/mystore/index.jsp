@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "User.*" %>
 <%@ page import = "Board.*" %>
+<%@ page import = "follow.*" %>
 <%@ page import ="java.util.List" %>
 <%@ page import = "java.util.ArrayList" %>
 <!DOCTYPE html>
@@ -39,6 +40,9 @@
 		userProfile = (String) session.getAttribute("userProf");
 		sellerLevel = (int)session.getAttribute("sellerLevel");
 	}
+	int userIdx = 0;
+	userIdx = userDAO.getUserIdx(userNick);
+	
 	
 	if(sellerLevel==1){
 		levelName = "화이트";
@@ -55,6 +59,15 @@
 		uploaderItems = boardDAO.showUserItem(uploaderDTO.getUserNick());
 	}
 	
+	int followerCnt = 0;
+	int followingCnt = 0;
+	boolean followCheck = false;
+	FollowDAO followDAO = new FollowDAO();
+	followerCnt = followDAO.userFollower(uploaderDTO.getUserNick());
+	followingCnt = followDAO.userFollowing(uploaderDTO.getUserNick());
+	if(!userNick.equals(uploaderDTO.getUserNick())){
+	followCheck = followDAO.followingCheck(uploaderDTO.getUserNick(), userNick);
+	}
 %>
       
         
@@ -83,11 +96,11 @@
     <div class="notification_box">
     	<a href="" target="_blank" rel="noopener noreferrer">
     		<img src="/HelloMarket/img/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-        	<div class="chat_cnt">4</div>
+        	<div class="chat_cnt">0</div>
         </a>
         <a id ="alarm_btn" target="_blank">
         	<img src="/HelloMarket/img/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-            <div class="alram_cnt">3</div>
+            <div class="alram_cnt">0</div>
         </a></div>
 </div>
 <% 
@@ -115,7 +128,7 @@
                 </div>
               </a>
               <ul class="gnb_my_list">
-              	<a href="/HelloMarket/mystore/index.jsp?<%=userNick%>">
+              	<a href="/HelloMarket/mystore/index.jsp?userIdx=<%=userIdx%>">
                   <li class="gnb_my_list_first">내상점</li>
                 </a>
                 <a href="/HelloMarket/mystore/coupon.jsp">
@@ -258,10 +271,8 @@
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
-              <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
-              <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="../img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+               <li><a href="/help/faq.html">헬프센터</a></li>
+             
             </ul>
           </div>
         </div>
@@ -291,7 +302,7 @@
                                         <div class="my_profile_image"><img
                                                 src="../img/img_apply_profile_4x_0419.png"
                                                 alt="n14474743의 프로필 이미지"><img
-                                                src="../img/img_level_5_x2.png"
+                                                src="../img/img_level1_30.png"
                                                 alt="뱃지 이미지"></div>
                                         <div class="my_profile_nick"><%=uploaderDTO.getUserNick() %></div>
                                        <%
@@ -299,62 +310,79 @@
                                        	%>
                                        			<div class="my_profile_follow_box">
                                        		    <div class="my_profile_follow_info">
-                                       		        <div class="follow_info_box"><img src="https://ccimage.hellomarket.com/web/2019/member/ico_hellotlak_14x14_x2.png" alt="상점 헬로톡 이미지"><span>헬로톡</span></div>
-                                       		        <div class="follow_info_box follow_info_blue" onclick= "following('<%=userNick%>','<%=uploaderDTO.getUserNick()%>')"><img src="https://ccimage.hellomarket.com/web/2019/member/ico_plus_14x14_x2.png" alt="상점 팔로우 이미지" class="follower_image"><span>팔로워</span></div>
-                                       		    </div>
-                                       		</div>
+                                       		        <div class="follow_info_box"><a href="/HelloMarket/chat.jsp?toId=<%=uploaderDTO.getUserNick()%>"><img src="https://ccimage.hellomarket.com/web/2019/member/ico_hellotlak_14x14_x2.png" alt="상점 헬로톡 이미지"><span>안녕톡</span></a></div>
+                                       <%
+                                       		if(followCheck){
+                                       %>
+                                       			<div class="follow_info_box follow_info_white" onclick= "cancelFollowing('<%=userNick%>','<%=uploaderDTO.getUserNick()%>')">
+                                       		        <img src="../img/ico_white_check_14x14_x2.png" alt="상점 팔로우 이미지" class="follower_image"><span>팔로워</span></div>
+                                       <% 		
+                                       		}else{
+                                       %>
+                                       		        <div class="follow_info_box follow_info_blue" onclick= "following('<%=userNick%>','<%=uploaderDTO.getUserNick()%>')">
+                                       		        <img src="https://ccimage.hellomarket.com/web/2019/member/ico_plus_14x14_x2.png" alt="상점 팔로우 이미지" class="follower_image"><span>팔로워</span></div>
+                                       		        
                                        <%		
                                        		}
                                        %>
-                                        <div class="my_profile_follow"><a href="/m/following">
-                                                <div class="my_profile_follow_count"><span>팔로잉</span><span><%=uploaderDTO.getUserFollowing() %></span></div>
+                                       		    </div>
+                                       		</div>
+                                       	<% 
+                                       		}else{
+                                       	%>
+                                       		<div class="my_profile_follow"><a href="following.jsp?userNick=<%=userNick%>">
+                                                <div class="my_profile_follow_count"><span>팔로잉</span><span><%=followingCnt%></span></div>
                                             </a>
-                                            <div class="my_profile_follow_line">|</div><a href="/m/followers">
-                                                <div class="my_profile_follow_count"><span>팔로워</span><span><%=uploaderDTO.getUserFollower() %></span></div>
+                                            <div class="my_profile_follow_line">|</div><a href="follower.jsp?userNick=<%=userNick%>">
+                                                <div class="my_profile_follow_count"><span>팔로워</span><span><%=followerCnt%></span></div>
                                             </a>
                                         </div>
+                                       	<%
+                                       		}
+                                       %>
+                                        
                                         <div class="my_profile_pro_review">
                                             <div class="my_profile_pro_review_box"><a
                                                     href="/s/@14474743?tab=item"><span>상품</span><span><%=uploaderItemCnt %></span></a></div>
                                             <div class="my_profile_pro_review_box"><a
-                                                    href="/s/@14474743?tab=review"><span>거래후기</span><span>123871</span>
-                                                    <div class="my_profile_pro_review_rating"><img
-                                                            src="../img/img_review_star_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 1"><img
-                                                            src="../img/img_review_star_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 2"><img
-                                                            src="../img/img_review_star_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 3"><img
-                                                            src="../img/img_review_star_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 4"><img
-                                                            src="../img/img_review_star_half_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 5"></div>
+                                                    href="/s/@14474743?tab=review"><span>거래후기</span><span>0</span>
+                                               
                                                 </a></div>
-                                        </div><span class="my_profile_more_text" width="0"><span><span><%=uploaderDTO.getUserProf() %></span></span><span
+                                                <%
+                                                	if(uploaderDTO.getUserProf()==null){
+                                                %>
+                                                	   </div><span class="my_profile_more_text" width="0"><span><span>등록된 상점소개가 없습니다.</span></span><span
                                                 style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
                                                     class="text_trcucate_more">... <p>전체보기</p></span></span></span>
-                                    </div>
+                                 					   </div>
+                                                <% 		
+                                                	}else{
+                                                %>
+                                                	</div><span class="my_profile_more_text" width="0"><span><span><%=uploaderDTO.getUserProf() %></span></span><span
+                                                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
+                                                    class="text_trcucate_more">... <p>전체보기</p></span></span></span>
+                                				    </div>
+                                                <% 		
+                                                	}
+                                                %>
+                                        
                                     <div class="my_profile_nav">
                                         <ul>
-                                            <li class="my_profile_m_nav"><a class="active active" id="undefined"
-                                                    href="/s/@14474743?tab=item"><span>상품 0</span></a></li>
-                                            <li class="my_profile_m_nav"><a
-                                                    href="/s/@14474743?tab=review"><span>거래후기&nbsp;</span><span>0</span>
-                                                    <div class="my_profile_pro_review_rating"><img
-                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 1"><img
-                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 2"><img
-                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 3"><img
-                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 4"><img
-                                                            src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
-                                                            alt="프로필 별점 없는 이미지 5"></div>
-                                                </a></li>
-                                            <li><a href="level.jsp"><span>나의 등급</span></a></li>
-                                            <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
-                                            <li><a href="/m/specialist/list.hm"><span>전문판매자 신청</span></a></li>
+                                            <%
+                                            	if(uploaderIdx != userIdx){
+                                            %>
+                                            
+                                            <% 
+                                            	}else{
+                                            		
+                                            %>
+                                            	<li><a href="level.jsp"><span>나의 등급</span></a></li>
+                                           		 <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
+                                            <% 
+                                            	}
+                                            %>
+                                            
+                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -381,18 +409,8 @@
                                         <div class="my_profile_pro_review_box"><a
                                                 href="/s/@14474743?tab=item"><span>상품</span><span>555555</span></a></div>
                                         <div class="my_profile_pro_review_box"><a
-                                                href="/s/@14474743?tab=review"><span>거래후기</span><span>123871</span>
-                                                <div class="my_profile_pro_review_rating"><img
-                                                        src="../img/img_review_star_16x16_x2.png"
-                                                        alt="프로필 별점 없는 이미지 1"><img
-                                                        src="../img/img_review_star_16x16_x2.png"
-                                                        alt="프로필 별점 없는 이미지 2"><img
-                                                        src="../img/img_review_star_16x16_x2.png"
-                                                        alt="프로필 별점 없는 이미지 3"><img
-                                                        src="../img/img_review_star_16x16_x2.png"
-                                                        alt="프로필 별점 없는 이미지 4"><img
-                                                        src="../img/img_review_star_half_16x16_x2.png"
-                                                        alt="프로필 별점 없는 이미지 5"></div>
+                                                href="/s/@14474743?tab=review"><span>거래후기</span><span>0</span>
+                                           
                                             </a></div>
                                     </div><span class="my_profile_more_text" width="0"><span><span>이 시대 최고의 판매왕</span></span><span
                                             style="position: fixed; visibility: hidden; top: 0px; left: 0px;"><span
@@ -416,9 +434,9 @@
                                                         src="https://ccimage.hellomarket.com/web/2019/member/img_review_star_blank_16x16_x2.png"
                                                         alt="프로필 별점 없는 이미지 5"></div>
                                             </a></li>
-                                        <li><a href="level.html"><span>나의 등급</span></a></li>
+                                        <li><a href="level.jsp"><span>나의 등급</span></a></li>
                                         <li><a href="profile.jsp"><span>내정보 설정</span></a></li>
-                                        <li><a href="/m/specialist/list.hm"><span>전문판매자 신청</span></a></li>
+                                    
                                     </ul>
                                 </div>
                             </div>

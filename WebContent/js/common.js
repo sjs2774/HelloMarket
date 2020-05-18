@@ -80,10 +80,10 @@
 
     function log_join(){
         const login= $(".login_btn").on('click',function(){
-            location.href = "login/login.html"
+            location.href = "/HelloMarket/login/login.html"
         })
         const sign_up = $(".signup_btn").on('click',function(){
-            location.href = "join/signup.html"
+            location.href = "/HelloMarket/join/signup.html"
         })
     }
     function alarm_open(){
@@ -95,10 +95,7 @@
     	location.href= "/HelloMarket/mystore/level.jsp"
     	event.stopImmedidatePropagation();
     })
-    $(".gnb_my_list_first").on('click',function(){
-    	location.href = "/HelloMarket/mystore/index.jsp"
-    	event.stopImmedidatePropagation();
-    })
+    
     $(".gnb_my_list_second").on('click',function(){
     	location.href = "/HelloMarket/mystore/coupon.jsp"
     	event.stopImmedidatePropagation();
@@ -116,7 +113,9 @@
     }                     
                  
     
-
+    function goIndex(userIdx){
+    	location.href="/HelloMarket/mystore/index.jsp?userIdx="+userIdx
+    }
    
     function init(){
     	$(".gnb_my_lyr").css('cursor','pointer');

@@ -297,34 +297,30 @@ public class UserDAO {
 		return userDTO;
 		
 	}
-	public void following(String myNick,String yourNick) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO userlist(user_follower) values(?) where user_nick=?";
-		try {
-			conn =Dbconn.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, yourNick);
-			pstmt.setString(2, myNick);
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		sql = "INSERT INTO userlist(user_following) values(?) where user_nick=?";
-		try {
-			conn = Dbconn.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, myNick);
-			pstmt.setString(2, yourNick);
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public int deleteUser(String user) {
+	      int rows = 0;
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "DELETE FROM userlist WHERE user_email=?";
+	      try {
+	         conn = Dbconn.getConnection();
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, user);
+	         rows = pstmt.executeUpdate();
+	         if (rows != 0) {
+	            System.out.println("성공");
+	            return 1; // 성공 
+	         }else {
+	            System.out.println("실패"); 
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }finally {
+	         Dbconn.close(conn, pstmt);
+	      }
+	      return -2;
+	      
+	   }
+
 	
-	public void cancelFollow(String myNick,String yourNick) {
-		Connection conn = null;
-		PreparedStatement pstmt =null;
-		String sql = "DELETE from userlist where user";
-	}
 }

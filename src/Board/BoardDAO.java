@@ -85,7 +85,7 @@ public class BoardDAO {
     	
     	try {
     		conn = Dbconn.getConnection();
-    		String sql ="select p_idx,p_title,p_price,p_image1_orig_name,p_image1_path from sellboard";
+    		String sql ="select p_idx,p_title,p_price,p_image1_orig_name,p_image1_path,deal_m1,p_status1 from sellboard";
     		pstmt = conn.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		while(rs.next()) {
@@ -95,6 +95,8 @@ public class BoardDAO {
     			boardDTO.setP_price(rs.getString("p_price"));
     			boardDTO.setP_image1_orig_name(rs.getString("p_image1_orig_name"));
     			boardDTO.setP_image1_path(rs.getString("p_image1_path"));
+    			boardDTO.setDeal_m1(rs.getString("deal_m1"));
+    			boardDTO.setP_status1(rs.getString("p_status1"));
     			board.add(boardDTO);
     		}
     	}catch(Exception e) {

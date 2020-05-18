@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <%@page import="User.UserDTO" %>
 <%@page import="User.UserDAO" %>
+<%@page import="follow.*" %>
+<%@page import ="Board.*" %>
 
 <html lang="en">
 
@@ -15,6 +17,7 @@
 </head>
 <body class="">
 <%
+	BoardDAO boardDAO = new BoardDAO();
 	String userId = (String) session.getAttribute("userId");
 	String userNick = (String) session.getAttribute("userNick");
 	UserDAO userDAO = new UserDAO();
@@ -24,6 +27,18 @@
 	int sellerLevel = userDTO.getSellerLevel();
 	int userPh = userDTO.getUserPh();
 	String userProf = userDTO.getUserProf();
+	boardDAO = new BoardDAO();
+	int itemCnt = boardDAO.showUserItemCnt(userNick);
+	
+	int userIdx = 0;
+	userIdx = userDAO.getUserIdx(userNick);
+	
+	int followerCnt = 0;
+	int followingCnt = 0;
+	FollowDAO followDAO = new FollowDAO();
+	followerCnt = followDAO.userFollower(userNick);
+	followingCnt = followDAO.userFollowing(userNick);
+	
 %>
     <div id="__next" style="height: auto !important;">
         <div class="mobile_banner">
@@ -51,9 +66,9 @@
                 <div class="btn_box">
                     <div class="nick"><img src="https://ccimage.hellomarket.com/web/2017/common/img_default_profile_60x60.png" width="36" height="36" alt="n15979427의 프로필 사진" class="profile_img"><span class="nick_title"><%=userNick %>님</span></div>
                     <div class="notification_box"><a href="https://account.hellomarket.com/messages" target="_blank" rel="noopener noreferrer"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_hellotalk.png" alt="채팅 아이콘" class="chat">
-                            <div class="chat_cnt">4</div>
+                            <div class="chat_cnt">0</div>
                         </a><a href="https://account.hellomarket.com/alarms" target="_blank"><img src="https://ccimage.hellomarket.com/web/2019/common/btn_title_notification.png" alt="알림목록 아이콘" class="alram">
-                            <div class="alram_cnt">3</div>
+                            <div class="alram_cnt">0</div>
                         </a></div>
                 </div>
                 <% 
@@ -80,7 +95,9 @@
                   <div><span class="level_description">나의등급</span><span class="level_description_name">화이트</span></div>
                 </div>
               <ul class="gnb_my_list">
+                  <a href="/HelloMarket/mystore/index.jsp?userIdx=<%=userIdx%>">
                   <li class="gnb_my_list_first">내상점</li>
+               	 </a>
                   <li class="gnb_my_list_second">할인쿠폰</li>
                   <li class="gnb_my_list_last">로그아웃</li>
               </ul>
@@ -210,10 +227,9 @@
           </div>
           <div class="link_box header_wrapper_sub">
             <ul>
-              <li><a href="/community/list.hm?category=DAC0002&amp;status=begin">이벤트</a></li>
+            
               <li><a href="/help/faq.html">헬프센터</a></li>
-              <li><a href="/HelloMarket/ad/index.html" target="_blank" rel="noopener noreferrer"><img
-                    src="/HelloMarket/img/ico_category_AD_x2.png" alt="광고센터 아이콘이미지">광고센터</a></li>
+             
             </ul>
           </div>
         </div>
@@ -239,39 +255,26 @@
                                             <div class="my_profile_image"><img
                                                     src="../img/img_apply_profile_4x_0419.png"
                                                     alt="n14474743의 프로필 이미지"><img
-                                                    src="../img/img_level_5_x2.png"
+                                                    src="../img/img_level1_30.png"
                                                     alt="뱃지 이미지"></div>
                                             <div class="my_profile_nick"><%=userNick %></div>
-                                            <div class="my_profile_shop_created">
-                                                <div class="my_profile_start_mobile">태조 2년 시작</div>
-                                                <div class="my_profile_start">태조 2년 시작</div>
-                                            </div>
+                                           
                                             <div class="my_profile_follow"><a href="/m/following">
-                                                    <div class="my_profile_follow_count"><span>팔로잉</span><span>7777</span>
+                                                    <div class="my_profile_follow_count"><span>팔로잉</span><span><%=followingCnt %></span>
                                                     </div>
                                                 </a>
                                                 <div class="my_profile_follow_line">|</div><a href="/m/followers">
-                                                    <div class="my_profile_follow_count"><span>팔로워</span><span>60억명</span>
+                                                    <div class="my_profile_follow_count"><span>팔로워</span><span><%=followerCnt %></span>
                                                     </div>
                                                 </a>
                                             </div>
                                             <div class="my_profile_pro_review">
                                                 <div class="my_profile_pro_review_box"><a
-                                                        href="/s/@14474743?tab=item"><span>상품</span><span>2351214</span></a>
+                                                        href="/s/@14474743?tab=item"><span>상품</span><span><%=itemCnt %></span></a>
                                                 </div>
                                                 <div class="my_profile_pro_review_box"><a
-                                                        href="/s/@14474743?tab=review"><span>거래후기</span><span>56439522341</span>
-                                                        <div class="my_profile_pro_review_rating"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 1"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 2"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 3"><img
-                                                                src="../img/img_review_star_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 4"><img
-                                                                src="../img/img_review_star_half_16x16_x2.png"
-                                                                alt="프로필 별점 없는 이미지 5"></div>
+                                                        href="/s/@14474743?tab=review"><span>거래후기</span><span>0</span>
+                                            
                                                     </a></div>
                                             </div>
                                             <span class="my_profile_more_text" width="0">
@@ -311,7 +314,7 @@
                                                 <li><a class="" id="scrollMain" href="level.jsp"><span>나의
                                                             등급</span></a></li>
                                                 <li><a class="active" href="profile.html"><span>내정보 설정</span></a></li>
-                                                <li><a href="/m/specialist/list.hm"><span>전문판매자 신청</span></a></li>
+                                             
                                             </ul>
                                         </div>
                                     </div>
@@ -347,7 +350,7 @@
 			                                            <% 
 			                                            }
 			                                            %>
-                                                        <div>20/150</div>
+                                                       
                                                     </div>
                                                     <div class="introduce_button"><button type="button">변경</button>
                                                     </div>
@@ -358,7 +361,7 @@
                                                     <div>
                                                         <div class="profile_userId_value"><%=userId %></div>
                                                     </div>
-                                                    <div><button class="" type="button">변경</button></div>
+                                                    
                                                 </li>
                                   
                                                 <li>
@@ -384,10 +387,10 @@
                                                 <li class="profile_password_area profile_password_area_first">
                                                     <div>비밀번호</div>
                                                     <div class="profile_userId_value">****************</div>
-                                                    <div><button class="" type="button">변경</button></div>
+                                                    
                                                 </li>
                                         
-                                            <div class="profile_edit_bye"><span>회원탈퇴</span></div>
+                                          
                                         </div>
                                     </div>
                                 </section>
