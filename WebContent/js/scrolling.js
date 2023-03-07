@@ -9,6 +9,10 @@ $(document).ready(function () {
     let img_cnt = 1; // 배너가 슬라이드 되면 현재 배너 위치를 나타내기 위한 변수 
 
 
+
+    function cloneNode (){
+        let cloneSlide_first= $banner.clon
+    }
     auto(); // 실행함수 
     function auto() {
         rollingId = setInterval(function () { rollingStart() }, 3000); //3초 간격으로 실행
